@@ -15,13 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('posts', 'PostController@index');
-Route::get('posts/{id}', 'PostController@show');
-Route::post('posts', 'PostController@store');
-Route::put('posts/{id}', 'PostController@update');
-Route::delete('posts/{id}', 'PostController@delete');
+	 
+	Route::get('posts', 'PostController@index');
+	Route::get('posts/{id}', 'PostController@show');
+	Route::post('posts', 'PostController@store');
+	Route::put('posts/{id}', 'PostController@update');
+	Route::delete('posts/{id}', 'PostController@delete');
 
 
-Auth::routes();
+Route::get('/login', 'LoginGetController@index');
+Route::post('/login', 'LoginGetController@login');
 
 Route::get('/home', 'HomeController@index')->name('home');
