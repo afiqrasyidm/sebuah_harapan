@@ -26,7 +26,9 @@ class LoginGetController extends Controller
 					],
 				]);
 
-			$body = $r->getBody();
-			return $body;
+				
+			$json = json_decode($r->getBody(), true);	
+				
+			return $json['data']['name'];
 	}
 }
