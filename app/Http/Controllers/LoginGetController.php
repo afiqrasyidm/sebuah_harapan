@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Input;
-
+use Auth;
 
 class LoginGetController extends Controller
 {
@@ -30,5 +30,9 @@ class LoginGetController extends Controller
 			$json = json_decode($r->getBody(), true);	
 				
 			return $json['data']['name'];
+	}
+	public function logout(){
+		
+			Auth::logout();
 	}
 }

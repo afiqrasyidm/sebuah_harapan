@@ -15,15 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-	 
+Route::group(['middleware' => ['auth']], function () { 
 	Route::get('posts', 'PostController@index');
 	Route::get('posts/{id}', 'PostController@show');
 	Route::post('posts', 'PostController@store');
 	Route::put('posts/{id}', 'PostController@update');
 	Route::delete('posts/{id}', 'PostController@delete');
+	
+	
+	
+});
+
+	Route::get('logout', 'Auth\LoginController@logout');
 
 
-Route::get('/login', 'LoginGetController@index');
-Route::post('/login', 'LoginGetController@login');
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
