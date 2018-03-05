@@ -33,8 +33,12 @@ class PostController extends Controller
 		$user_id = Auth::guard('api')->id();
 		
 		$posts = Post ::where('user_id', $user_id )->get();
-        
-		return response()->json($posts, 201);
+
+		dd($posts);
+
+		return view('belimbing/home')->with('posts',$posts);
+
+//		return response()->json($posts, 201);
     }
 	
 

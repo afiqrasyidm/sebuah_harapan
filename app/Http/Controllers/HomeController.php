@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use App\Post;
+use App\Comment;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -23,6 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $posts = Post::all();
+        $users = User::all();
+
+        $comments = Comment ::all();
+
+//        return response()->json($Comments, 201);
+
+        return view('belimbing/home')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
     }
 }

@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+////    return view('belimbing/home');
+//});
+
+Route::get('/', 'HomeController@index');
 
 Route::group(['middleware' => ['auth']], function () { 
 	Route::get('posts', 'PostController@index');

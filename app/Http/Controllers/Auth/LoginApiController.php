@@ -1,5 +1,3 @@
-
-
 <?php
 //ini untuk MICROSERVICE, YANG FULL STACK CONTROLLER LOGINNYA LOGINCONTROLLER
 namespace App\Http\Controllers\Auth;
