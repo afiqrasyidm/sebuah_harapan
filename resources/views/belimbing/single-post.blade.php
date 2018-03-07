@@ -1,96 +1,84 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="alert alert-warning">
-  <h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami jawaban terbaikmu!</h4>
-</div>
-
-
-
 <div class="row">
         <div class="col-lg-9">
-
-          
-
-            @foreach($posts as $thepost)
-                <div class="my-3 p-3 bg-white rounded box-shadow">
+			    <div class="my-3 p-3 bg-white rounded box-shadow">
                     <div class="media text-muted pt-3">
                         <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
                         <div class="pb-3 mb-0 border-bottom border-gray">
                             <a href="#" style="text-decoration: none;">
                                 <strong>
-                                    @foreach($users as $theuser)
-                                        @if($theuser->id == $thepost->user_id)
-                                            {{ $theuser->name }}
+                                    @foreach($users as $user)
+                                        @if($user->id == $post->user_id)
+                                            {{ $user->name }}
                                         @endif
                                     @endforeach
                                 </strong>
                                 <br>
                                 <h1>
-                                    {{ $thepost->title }}
+                                    {{ $post->title }}
                                 </h1>
                             </a>
+                            <div class="text-left">
+                                <a class="btn btn-lg btn-outline-dark my-2 my-sm-0" href="#">Jawab</a>
+                            </div>
                             <div class="text-right">
                                 <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
                                     Keren
-                                    <span class="badge badge-pill align-text-bottom">{{ $thepost->up_vote }}</span>
+                                    <span class="badge badge-pill align-text-bottom">{{ $post->up_vote }}</span>
                                 </a>
                                 <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-                                    B Aja
+                                    Biasa aja
                                     <span class="nampak badge badge-pill align-text-bottom">
-                                        {{ $thepost->down_vote }}
+                                        {{ $post->down_vote }}
                                     </span>
                                 </a>
-                                <a class="btn btn-lg btn-outline-dark my-2 my-sm-0" href="#">Jawab!</a>
+                                
                             </div>
+                            
                         </div>
                     </div>
 
+                    <h3>Jawaban:</h3>
+                    
+                       @foreach($comments as $comment)
+                            <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
+	                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+		                        <strong class="d-block text-gray-dark">
+		                            @foreach($users as $user)
+		                                @if($user->id == $comment->user_id)
+		                                    {{ $user->name }}
+		                                @endif
+		                            @endforeach
+		                        </strong>
+		                        </br>
+		                        {{ $comment->body }}
+		                        </br>
+		                        <br>
 
-                    <div class="media text-muted pt-3 col-lg-6">
-
-                        @foreach($comments as $thecomment)
-                            @if($thecomment->post_id == $thepost->id)
-                        <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
-                        <strong class="d-block text-gray-dark">
-                            @foreach($users as $theuser)
-                                @if($theuser->id == $thecomment->user_id)
-                                    {{ $theuser->name }}
-                                @endif
-                            @endforeach
-                        </strong>
-
-                                    {{ $thecomment->body }}
-                        <br>
-
-                        <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
-                            Keren
-                            <span class="badge badge-pill align-text-bottom">
-                                {{ $thecomment->up_vote }}
-                            </span>
-                        </a>
-                        <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-                            B Aja
-                            <span class="nampak badge badge-pill align-text-bottom">
-                                    {{ $thecomment->down_vote }}
-                                </span>
-                        </a>
-                                @break
-                            @endif
+		                        <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
+		                            Keren
+		                            <span class="badge badge-pill align-text-bottom">
+		                                {{ $comment->up_vote }}
+		                            </span>
+		                        </a>
+		                        <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
+		                            Biasa aja
+		                            <span class="nampak badge badge-pill align-text-bottom">
+		                                    {{ $comment->down_vote }}
+		                            </span>
+		                        </a>
+		                    </p>
                         @endforeach
-                        </p>
-                    </div>
+                        
+                    
 
                     <small class="d-block text-right mt-3">
                         <a href="#">Lihat semua jawaban</a>
                     </small>
 
-                </div>
-            @endforeach
-
-            {{ $posts->links() }}
+                </div>            
 
         </div>
 
@@ -198,7 +186,5 @@
         </div>
     </div>
 
+
 @endsection
-
-
-

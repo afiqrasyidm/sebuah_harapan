@@ -15,7 +15,7 @@
 ////    return view('belimbing/home');
 //});
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'PublicController@index');
 
 Route::group(['middleware' => ['auth']], function () { 
 	Route::get('posts', 'PostController@index');
@@ -23,14 +23,18 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('posts', 'PostController@store');
 	Route::put('posts/{id}', 'PostController@update');
 	Route::delete('posts/{id}', 'PostController@delete');
-	
-	
-	
+		
 });
 
-	Route::get('logout', 'Auth\LoginController@logout');
-
+Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/test', 'HomeController@test');
+
+Route::get('post/{id}', [ 
+    'as' => 'show.single.post',
+    'uses' =>'PostController@show',
+])->where('id', '[0-9]+');

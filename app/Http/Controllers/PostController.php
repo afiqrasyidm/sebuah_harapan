@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
+use App\Comment;
 
 use Auth;
 use App;
@@ -23,10 +25,15 @@ class PostController extends Controller
 
     public function show($id)
     {
-		
-        return Post::find($id);
+		$post = Post::find($id);
+        $users = User::all();
+
+        $comments = Comment::where('post_id', $id)->get();
+
+        return view('belimbing/single-post')->with('post',$post)->with('users',$users)->with('comments',$comments);
     }
-	public function show_post_uid()
+	
+    public function show_post_uid()
 	
 	{
 

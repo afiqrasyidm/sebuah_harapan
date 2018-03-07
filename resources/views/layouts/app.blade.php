@@ -1,71 +1,100 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Belimbing</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/offcanvas.css') }}" rel="stylesheet">
+    <style>
+        nampak:hover {
+            color: black;
+        }
+    </style>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<body class="bg-light">
 
-                    </ul>
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
+    <a class="btn btn-success my-2 my-sm-0" href="{{url('/home')}}">Belimbing</a>
+    {{--</a>--}}
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            @guest
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pertanyaan Populer</a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+            </li>
+            @else
+               
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('/home') }}">Beranda <span class="sr-only">(current)</span></a>
+                </li>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/myquestion') }}">Pertanyaan saya </a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
+                </li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/answer') }}">Jawab Pertanyaan </a>
+                </li>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+                 <li class="nav-item">
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
+                </li>
+               
+                
+            @endguest
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
+</nav>
+       
+               
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<main role="main" class="container">
+    <div class="row">
+        @yield('content')
+    </div>
+</main>
+    
+ <!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+<script>window.jQuery || document.write('<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"><\/script>')</script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/holder.min.js') }}"></script>
+<script src="{{ asset('js/offcanvas.js') }}"></script>
 </body>
 </html>

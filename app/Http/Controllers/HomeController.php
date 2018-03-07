@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $posts = Post::all();
+        $posts = Post::orderBy('up_vote', 'DESC')->paginate(10);
         $users = User::all();
 
         $comments = Comment ::all();
@@ -35,5 +35,18 @@ class HomeController extends Controller
 //        return response()->json($Comments, 201);
 
         return view('belimbing/home')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
+    }
+
+    public function test()
+    {
+
+        $posts = Post::all();
+        $users = User::all();
+
+        $comments = Comment ::all();
+
+//        return response()->json($Comments, 201);
+
+        return view('belimbing/test')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
     }
 }
