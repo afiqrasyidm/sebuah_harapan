@@ -13,78 +13,85 @@
                         <div class="pb-3 mb-0 border-bottom border-gray">
                             <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" style="text-decoration: none;">
                                 <strong>
-                                    @foreach($users as $theuser)
-                                        @if($theuser->id == $thepost->user_id)
-                                            {{ $theuser->name }}
-                                        @endif
-                                    @endforeach
+                                            {{ $thepost->name }}
+											
                                 </strong>
                                 <br>
                                 <h1>
                                     {{ $thepost->title }}
                                 </h1>
+								
                             </a>
+								<p> di post pada: {{ $thepost->created_at }}</p>
+							 <br>
+							  <br>
                             <div class="text-right">
                                 <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
-                                    Keren
+                                    Menarik
                                     <span class="badge badge-pill align-text-bottom">{{ $thepost->up_vote }}</span>
                                 </a>
                                 <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-                                    B Aja
+                                    Tidak Menarik
                                     <span class="nampak badge badge-pill align-text-bottom">
                                         {{ $thepost->down_vote }}
                                     </span>
                                 </a>
-                                <a class="btn btn-lg btn-outline-dark my-2 my-sm-0" href="#">Jawab!</a>
+                                <a class="btn btn-lg btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab!</a>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="media text-muted pt-3 col-lg-6">
-
+					
+					<br>
+					<br>
+					<p>Jawaban:</p>
+                    <div class="media text-muted pt-3">
+						
                         @foreach($comments as $thecomment)
                             @if($thecomment->post_id == $thepost->id)
                         <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
+                        <span class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+					
                         <strong class="d-block text-gray-dark">
-                            @foreach($users as $theuser)
-                                @if($theuser->id == $thecomment->user_id)
-                                    {{ $theuser->name }}
-                                @endif
-                            @endforeach
+                                    {{ $thecomment->name }}
+									
                         </strong>
-
-                                    {{ $thecomment->body }}
-                        <br>
-
-                        <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
-                            Keren
-                            <span class="badge badge-pill align-text-bottom">
-                                {{ $thecomment->up_vote }}
-                            </span>
-                        </a>
-                        <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-                            B Aja
-                            <span class="nampak badge badge-pill align-text-bottom">
-                                    {{ $thecomment->down_vote }}
-                                </span>
-                        </a>
+						
+						
+						
+						  <div class ="left">
+						
+                                	{!! $thecomment->body !!}
+							</div>
+						
+						<div>
+							<a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
+								Menarik
+								<span class="badge badge-pill align-text-bottom">
+									{{ $thecomment->up_vote }}
+								</span>
+							</a>
+							<a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
+								Tidak Menarik
+								<span class="nampak badge badge-pill align-text-bottom">
+										{{ $thecomment->down_vote }}
+									</span>
+							</a>
+						</div>
                                 @break
                             @endif
                         @endforeach
-                        </p>
+						</span>
                     </div>
 
                     <small class="d-block text-right mt-3">
-                        <a href="#">Lihat semua jawaban</a>
+                        <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Lihat semua jawaban</a>
                     </small>
 
                 </div>
             @endforeach
 
-            {{ $posts->links() }}
+          
         </div>
 
         <div class="col-lg-3">

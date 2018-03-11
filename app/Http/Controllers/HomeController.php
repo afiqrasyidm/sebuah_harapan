@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
 
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     /**
@@ -27,14 +29,28 @@ class HomeController extends Controller
     public function index()
     {
 
-        $posts = Post::orderBy('up_vote', 'DESC')->paginate(10);
-        $users = User::all();
-
-        $comments = Comment ::all();
+        
+		$posts = DB::table('posts')
+			 ->select('posts.id as id','users.name', 'posts.created_at as created_at',
+			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
+			 'posts.down_vote as down_vote'
+			 )
+            ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+			 ->orderBy('posts.created_at','DESC')
+			 
+            ->get();
+			
+		$comments = DB::table('comments')
+		
+            ->leftJoin('users', 'users.id', '=', 'comments.user_id')
+			->orderBy('comments.created_at','DESC')
+            ->get();
+		
+//		return $posts;
 
 //        return response()->json($Comments, 201);
 
-        return view('belimbing/home')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
+        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }
 
     public function test()

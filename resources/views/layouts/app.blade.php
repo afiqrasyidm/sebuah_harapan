@@ -19,13 +19,15 @@
             color: black;
         }
     </style>
+	
+<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
 </head>
 
 <body class="bg-light">
 
 <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-    <a class="btn btn-success my-2 my-sm-0" href="{{url('/home')}}">Belimbing</a>
+    <a style="color:black; background-color: yellow;" class="btn my-2 my-sm-0" href="{{url('/home')}}">Belimbing</a>
     {{--</a>--}}
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
@@ -42,14 +44,14 @@
             </li>
            
             <li class="nav-item">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
+                <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+                <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
             </li>
             @else
                
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="{{ url('/home') }}">Beranda <span class="sr-only">(current)</span></a>
                 </li>
 
@@ -61,22 +63,18 @@
                     <a class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/answer') }}">Jawab Pertanyaan </a>
-                </li>
-
+                
                  <li class="nav-item">
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
+                    <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
                 </li>
                
                 
             @endguest
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+       
     </div>
+	
+	
 </nav>
        
                
@@ -90,7 +88,6 @@
  <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
 <script>window.jQuery || document.write('<script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"><\/script>')</script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>

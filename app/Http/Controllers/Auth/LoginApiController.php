@@ -7,7 +7,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
-class LoginController extends Controller
+class LoginApiController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

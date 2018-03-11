@@ -18,11 +18,12 @@
 Route::get('/', 'PublicController@index');
 
 Route::group(['middleware' => ['auth']], function () { 
-	Route::get('posts', 'PostController@index');
-	Route::get('posts/{id}', 'PostController@show');
-	Route::post('posts', 'PostController@store');
-	Route::put('posts/{id}', 'PostController@update');
-	Route::delete('posts/{id}', 'PostController@delete');
+
+	Route::get('/ask', 'PostController@ask');
+	Route::get('/myquestion', 'PostController@show_post_uid');
+	Route::post('/ask', 'PostController@ask_post');
+	Route::post('post/{id}', 'PostController@comment_post');
+	Route::get('/home', 'HomeController@index')->name('home');
 		
 });
 
@@ -30,7 +31,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/test', 'HomeController@test');
 
