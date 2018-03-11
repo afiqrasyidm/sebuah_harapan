@@ -32,21 +32,10 @@ class PublicController extends Controller
 
 //        return response()->json($Comments, 201);
 
-        return view('home')->with('posts',$posts)->with('comments',$comments);
+        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }
 	
 	 
-    public function kritik()
-    {
-	
-
-//        return response()->json($Comments, 201);
-         
-		
-			//return "asd";
-		
-        return view('kritik');
-    }
 
 
 }
