@@ -121,19 +121,13 @@ class PostController extends Controller
 			 ->orderBy('posts.created_at','DESC')->paginate(10);
 			 
 
-			
-		$comments = DB::table('comments')
-		
-            ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-			->orderBy('comments.created_at','DESC')
-            ->get();
-		
+		//return "asda";
 	
 		
 
 		//dd($posts);
 
-		return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
+		return view('belimbing/myquestion')->with('posts',$posts);
 
 //		return response()->json($posts, 201);
     }
