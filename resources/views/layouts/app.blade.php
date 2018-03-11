@@ -59,12 +59,7 @@
 				style="color:black; margin-left:10px;"  class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
             </li>
          
-			<li class="nav-item">
-                    <a 
-					onMouseOver="this.style.color='#878686'"
-					onMouseOut="this.style.color='black'" 
-					style="color:black;" class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
-            </li>
+			
            
             <li class="nav-item">
                 <a 
