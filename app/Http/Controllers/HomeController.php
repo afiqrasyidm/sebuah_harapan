@@ -6,8 +6,9 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,16 @@ class HomeController extends Controller
     public function index()
     {
 
-        
+      /*  DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->update(['last_login' => Carbon::now()->toDateTimeString(),
+			'login_count' => DB::raw('login_count + 1'),
+			
+			
+			]);
+		*/
+		
+		
 		$posts = DB::table('posts')
 			 ->select('posts.id as id','users.name', 'posts.created_at as created_at',
 			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',

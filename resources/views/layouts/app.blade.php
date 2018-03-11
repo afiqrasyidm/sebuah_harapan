@@ -14,10 +14,19 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/offcanvas.css') }}" rel="stylesheet">
+	 
     <style>
-        nampak:hover {
-            color: black;
-        }
+      .offcanvas-collapse{
+			background-color:white;
+			
+	  }
+	  .navbar-collapse{
+		margin-right: auto; margin-left: auto;
+	  }
+	  
+	    .navbar-toggler-icon {
+		  background-image: url("https://openclipart.org/image/2400px/svg_to_png/221605/menu-icon.png");
+		}
     </style>
 	
 <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
@@ -25,51 +34,82 @@
 
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md fixed-top navbar-white bg-white">
+	
+	
+	
     {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-    <a style="color:black; background-color: yellow;" class="btn my-2 my-sm-0" href="{{url('/home')}}">Belimbing</a>
+    <a class="btn my-2 my-sm-0" href="{{url('/home')}}">
+		<img src="{{URL::asset('/image/logo.JPG')}}" alt="profile Pic" height="45" width="160">
+	
+		
+		</a>
     {{--</a>--}}
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" style="color:black;">
         <ul class="navbar-nav mr-auto">
             @guest
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
+            <li class="nav-item active"> 
+                <a 
+				onMouseOver="this.style.color='#878686'"
+				onMouseOut="this.style.color='black'" 
+				style="color:black; margin-left:10px;"  class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
             </li>
          
 			<li class="nav-item">
-                    <a class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
+                    <a 
+					onMouseOver="this.style.color='#878686'"
+					onMouseOut="this.style.color='black'" 
+					style="color:black;" class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
             </li>
            
             <li class="nav-item">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
+                <a 
+				onMouseOver="this.style.color='#878686'"
+				onMouseOut="this.style.color='black'" 
+				style="color:black;" class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+                <a 
+				onMouseOver="this.style.color='#878686'"
+				onMouseOut="this.style.color='black'" 
+				style="color:black;" class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
 
             </li>
             @else
                
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ url('/home') }}">Beranda <span class="sr-only">(current)</span></a>
+                    <a 
+					
+					 onMouseOver="this.style.color='#878686'"
+					onMouseOut="this.style.color='black'" 
+					
+					style="color:black;"  class="nav-link" href="{{ url('/home') }}">Beranda <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/myquestion') }}">Pertanyaan saya </a>
+                    <a 
+					onMouseOver="this.style.color='#878686'"
+					onMouseOut="this.style.color='black'" 
+					style="color:black;" class="nav-link" href="{{ url('/myquestion') }}">Pertanyaan saya </a>
                 </li>
                
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
+                    <a 
+					onMouseOver="this.style.color='#878686'"
+					onMouseOut="this.style.color='black'" 
+					style="color:black;" class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
                 </li>
-				<li class="nav-item">
-                    <a class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
-				</li>
+				
                 
                  <li class="nav-item">
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
+                    <a 
+					onMouseOver="this.style.color='#878686'"
+					onMouseOut="this.style.color='black'" 
+					class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
                 </li>
                
                 
@@ -81,6 +121,8 @@
 	
 	
 </nav>
+<br>
+<br>
        
                
 
