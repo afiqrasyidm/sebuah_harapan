@@ -30,14 +30,14 @@ class HomeController extends Controller
     public function index()
     {
 
-      /*  DB::table('users')
+        DB::table('users')
             ->where('id', Auth::user()->id)
             ->update(['last_login' => Carbon::now()->toDateTimeString(),
 			'login_count' => DB::raw('login_count + 1'),
 			
 			
 			]);
-		*/
+		
 		
 		
 		$posts = DB::table('posts')
