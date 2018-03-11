@@ -90,7 +90,9 @@
 
                 </div>
             @endforeach
-
+			
+			
+{{ $posts->links() }}
           
         </div>
 

@@ -16,6 +16,7 @@
 //});
 
 Route::get('/', 'PublicController@index');
+Route::get('/kritik', 'PublicController@kritik');
 
 Route::group(['middleware' => ['auth']], function () { 
 

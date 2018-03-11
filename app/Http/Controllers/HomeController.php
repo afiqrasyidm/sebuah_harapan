@@ -38,7 +38,7 @@ class HomeController extends Controller
             ->leftJoin('users', 'posts.user_id', '=', 'users.id')
 			 ->orderBy('posts.created_at','DESC')
 			 
-            ->get();
+            ->paginate(10);
 			
 		$comments = DB::table('comments')
 		

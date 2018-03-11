@@ -38,7 +38,9 @@ class PostController extends Controller
 			 ->where('comments.post_id', '=', $id)
             ->get();
 	
-	
+		if($post == NULL){
+			abort(404);
+		}
 	//return $comments ;
 		
 	//	return $post;
@@ -116,9 +118,9 @@ class PostController extends Controller
 			 )
             ->leftJoin('users', 'posts.user_id', '=', 'users.id')
 			 ->where('users.id', '=', Auth::user()->id)
-			 ->orderBy('posts.created_at','DESC')
+			 ->orderBy('posts.created_at','DESC')->paginate(10);
 			 
-            ->get();
+
 			
 		$comments = DB::table('comments')
 		

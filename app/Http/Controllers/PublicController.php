@@ -22,7 +22,7 @@ class PublicController extends Controller
             ->leftJoin('users', 'posts.user_id', '=', 'users.id')
 			 ->orderBy('posts.created_at','DESC')
 			 
-            ->get();
+           ->paginate(10);
 			
 		$comments = DB::table('comments')
 		
@@ -33,6 +33,19 @@ class PublicController extends Controller
 //        return response()->json($Comments, 201);
 
         return view('home')->with('posts',$posts)->with('comments',$comments);
+    }
+	
+	 
+    public function kritik()
+    {
+	
+
+//        return response()->json($Comments, 201);
+         
+		
+			//return "asd";
+		
+        return view('kritik');
     }
 
 

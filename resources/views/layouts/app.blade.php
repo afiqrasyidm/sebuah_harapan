@@ -39,15 +39,17 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pertanyaan Populer</a>
+         
+			<li class="nav-item">
+                    <a class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
             </li>
            
             <li class="nav-item">
-                <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+
             </li>
             @else
                
@@ -62,14 +64,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
                 </li>
-
+				<li class="nav-item">
+                    <a class="nav-link" href="{{ url('/kritik') }}">Kritik dan Saran</a>
+				</li>
                 
                  <li class="nav-item">
-                    <a class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
                 </li>
                
                 
             @endguest
+			
         </ul>
        
     </div>
