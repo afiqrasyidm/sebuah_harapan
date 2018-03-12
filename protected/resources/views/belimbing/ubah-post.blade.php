@@ -48,7 +48,7 @@
 					<br>
 					
 				 <div class="form-group">
-					<input  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" name="title" placeholder="Contoh: Kenapa Belimbing warnanya kuning? " > 
+					<input  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" value = "{{ $post->title }}" name="title"> 
 				  </div>
 			    	
 				<br><br>
@@ -60,10 +60,11 @@
 					<div class="media text-muted pt-3">
 						
 					
-							<textarea  id="summernote" name="body"></textarea >
+							<textarea  id="summernote" name="body" > </textarea >
 										  <script>
 											$(document).ready(function() {
 												$('#summernote').summernote();
+												$('#summernote').summernote('code', '{!! $post->body !!}');
 											});
 										  </script>
                       </div>
@@ -73,7 +74,7 @@
 				
 				</div>
 				
-				<button align="center" type="submit"  class="btn success" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
+				<button align="center" type="submit" name="ubah_final" value="ubah_final"  class="btn success" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
 				
 		</form>	
 					<br>

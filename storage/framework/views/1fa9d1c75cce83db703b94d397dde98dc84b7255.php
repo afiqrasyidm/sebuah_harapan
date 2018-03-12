@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
@@ -31,14 +30,14 @@
   
   
 <div class="alert alert-warning">
-  <h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami pertanyaanmu!</h4>
+  <h4>Hai <?php echo e(Auth::user()->name); ?>, tunjukkan pada kami pertanyaanmu!</h4>
 </div>
 
 <div class="row">
         <div class="col-lg-12">
 		
 		<form class="form-horizontal" method="post" action="" role="form">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
 				<br>
 				<br>
@@ -48,7 +47,7 @@
 					<br>
 					
 				 <div class="form-group">
-					<input  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" name="title" placeholder="Contoh: Kenapa Belimbing warnanya kuning? " > 
+					<input  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" value = "<?php echo e($post->title); ?>" name="title"> 
 				  </div>
 			    	
 				<br><br>
@@ -60,10 +59,11 @@
 					<div class="media text-muted pt-3">
 						
 					
-							<textarea  id="summernote" name="body"></textarea >
+							<textarea  id="summernote" name="body" > </textarea >
 										  <script>
 											$(document).ready(function() {
 												$('#summernote').summernote();
+												$('#summernote').summernote('code', '<?php echo $post->body; ?>');
 											});
 										  </script>
                       </div>
@@ -73,7 +73,7 @@
 				
 				</div>
 				
-				<button align="center" type="submit"  class="btn success" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
+				<button align="center" type="submit" name="ubah_final" value="ubah_final"  class="btn success" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
 				
 		</form>	
 					<br>
@@ -87,4 +87,5 @@
       
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

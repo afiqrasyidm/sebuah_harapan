@@ -17,12 +17,15 @@
 	 
     <style>
       .offcanvas-collapse{
+			margin-top:30px;
 			background-color:white;
 			
 	  }
 	  .navbar-collapse{
 		margin-right: auto; margin-left: auto;
+		text-align: center;
 	  }
+	  
 	  
 	    .navbar-toggler-icon {
 		  background-image: url("https://openclipart.org/image/2400px/svg_to_png/221605/menu-icon.png");
