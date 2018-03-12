@@ -67,7 +67,7 @@
 								
 								<p> Oleh {{ $post->created_at }}</p>
 								
-								@if ( Auth::user()->id == $post->user_id )
+								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
 								<div class="text-left">
 							
 									<form class="form-horizontal" method="post" action="" role="form">
