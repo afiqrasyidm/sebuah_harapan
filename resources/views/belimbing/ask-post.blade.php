@@ -17,12 +17,19 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
  
-    <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/js/froala_editor.pkgd.min.js"></script>
- 
-    <!-- Initialize the editor. -->
-    <script> $(function() { $('.body_pertanyaan').froalaEditor() }); </script>
-
+       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+		
+		<style>
+      .popover-content, .note-children-container{
+			display: none;
+			
+	  }
+	  
+    </style>
+  
+  
 <div class="alert alert-warning">
   <h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami pertanyaanmu!</h4>
 </div>
@@ -53,7 +60,12 @@
 					<div class="media text-muted pt-3">
 						
 					
-							<textarea class="body_pertanyaan"  name="body" ></textarea>
+							<textarea  id="summernote" name="body"></textarea >
+										  <script>
+											$(document).ready(function() {
+												$('#summernote').summernote();
+											});
+										  </script>
                       </div>
 					<br>
 					<br>

@@ -8,15 +8,22 @@
 	@endif
 
 </div>
+<style>
+      .popover-content, .note-children-container{
+			display: none;
+			
+	  }
+	  
+    </style>
+
+
 
 
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
  
-    <!-- Include Editor style. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
   
     <!-- Create a tag that we will use as the editable area. -->
     <!-- You can use a div tag as well. -->
@@ -27,51 +34,49 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
  
-    <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/js/froala_editor.pkgd.min.js"></script>
  
-    <!-- Initialize the editor. -->
-    <script> $(function() { $('.body_pertanyaan').froalaEditor() }); </script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
 <div class="row">
+	
+
+	
+	
         <div class="col-lg-12">
 			    <div class="my-3 p-3 bg-white rounded box-shadow">
                     <div class="media text-muted pt-3">
                         <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
                         <div class="pb-3 mb-0 border-bottom border-gray">
-                            <a href="#" style="text-decoration: none;">
                                 <strong>
                                             {{ $post->name }}
                                        
                                 </strong>
                                 <br>
-                                <h1>
+                                <h1 
+									style="color:black;">
                                     {{ $post->title }}
                                 </h1>
-                            </a>
-								<p> di post pada: {{ $post->created_at }}</p>
-							<div>
+                           	<p> di post pada: {{ $post->created_at }}</p>
+							<div style="color:black;">
 									{!! $post->body !!}
 							  
 							</div>
                            
-                            <div class="text-right">
-                                <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
-                                    Menarik
-                                    <span class="badge badge-pill align-text-bottom">{{ $post->up_vote }}</span>
-                                </a>
-                                <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-                                  Tidak Menarik
-                                    <span class="nampak badge badge-pill align-text-bottom">
-                                        {{ $post->down_vote }}
-                                    </span>
-                                </a>
-                                
-                            </div>
+                            
                             
                         </div>
                     </div>
+					<br>
+					<br>
 
+					
+		
+
+  
+					
+					
                     <h3>Jawaban:</h3>
                     
 					<form class="form-horizontal" method="post" action="" role="form">
@@ -84,7 +89,13 @@
 								<div class="media text-muted pt-3">
 									
 								
-										<textarea required class="body_pertanyaan"  name="body" ></textarea>
+									
+										  <textarea  id="summernote" name="body"></textarea >
+										  <script>
+											$(document).ready(function() {
+												$('#summernote').summernote();
+											});
+										  </script>
 								  </div>
 								<br>
 								<br>
@@ -114,18 +125,6 @@
 		                        </br>
 		                   
 
-		                        <a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
-		                            Menarik
-		                            <span class="badge badge-pill align-text-bottom">
-		                                {{ $comment->up_vote }}
-		                            </span>
-		                        </a>
-		                        <a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
-		                           Tidak Menarik
-		                            <span class="nampak badge badge-pill align-text-bottom">
-		                                    {{ $comment->down_vote }}
-		                            </span>
-		                        </a>
 		                    </p>
 
                         @endforeach

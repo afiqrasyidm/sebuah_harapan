@@ -13,7 +13,14 @@
                     <div class="media text-muted pt-3">
                         
                         <div class="pb-3 mb-0">
-                            <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" style="text-decoration: none;">
+                            <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" 
+							
+							onMouseOver="this.style.color='#878686'"
+							onMouseOut="this.style.color='black'" 
+							
+							style="text-decoration: none;color:black;"
+							
+							>
                                 <h1> {{ $thepost->title }} </h1>
                             </a>
 							<p>oleh {{ $thepost->name }} pada {{ $thepost->created_at }}</p>
@@ -51,19 +58,15 @@
                         So, mari kita berbagi pertanyaan dan jawaban!
                     </p>
                     <p class="small">
+                       Belimbing. Tanya apapun disini!
+                    </p>
+					
+					<p class="small">
                         This is just for sharing only. The first Indonesian question answer community.
                     </p>
                 </div>
 
-                <div class="my-3 p-3 bg-white rounded box-shadow">
-                    <p class="small">
-                        <a href="#">About</a> -
-                        <a href="#"> Terms</a> -
-                        <a href="#">Privacy</a> -
-                        <a href="#">Disclaimer</a> -
-                        <a href="#">Advertise</a>
-                    </p>
-                </div>
+               
 
             </div>
 

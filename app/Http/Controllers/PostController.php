@@ -89,15 +89,22 @@ class PostController extends Controller
 			$post->title = Input::get('title');
 			$post->user_id = Auth::user()->id;
 			$post->post_category = 0;
-			$post->body = Input::get('body');
 			
+		if(Input::get('body')!=NULL)	
+			$post->body = Input::get('body');
+		else
+			$post->body =" ";
+		
 			$post->up_vote = 0;
 			$post->down_vote = 0;
 		
 		
 			$post->save();
+		
 			
-            return redirect()->route('home');
+       	
+				return redirect()->route('show.single.post', ['id' => $post->id]);
+		
 	
     }
 	
