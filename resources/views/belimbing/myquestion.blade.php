@@ -25,6 +25,15 @@
                             <div class="text-left">
                                 <a class="btn btn-md btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab</a>
                             </div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
                         </div>
                     </div> 
                 </div>

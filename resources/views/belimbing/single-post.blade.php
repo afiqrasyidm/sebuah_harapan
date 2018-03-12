@@ -49,22 +49,48 @@
                     <div class="media text-muted pt-3">
                         <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
                         <div class="pb-3 mb-0 border-bottom border-gray">
+						
+						
+								
                                 <strong>
-                                            {{ $post->name }}
+                                            Posted by: {{ $post->name }}
                                        
                                 </strong>
                                 <br>
+								  <br>
                                 <h1 
 									style="color:black;">
                                     {{ $post->title }}
                                 </h1>
-                           	<p> di post pada: {{ $post->created_at }}</p>
-							<div style="color:black;">
-									{!! $post->body !!}
-							  
-							</div>
-                           
-                            
+								
+								
+								
+								<p> Oleh {{ $post->created_at }}</p>
+								
+								@if ( Auth::user()->id == $post->user_id )
+								<div class="text-left">
+							
+									<form class="form-horizontal" method="post" action="" role="form">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<button  type="submit" name="ubah"  value="ubah" class="btn btn-outline-warning my-2 my-sm-0">Ubah</button>
+									
+										<button  type="submit" name="hapus"  value="hapus" class="btn btn-outline-danger my-2 my-sm-0">Hapus</button>
+											
+									</form>	
+					
+					
+								</div>
+								
+								
+								@endif
+								  <br>
+								    <br>
+								<div style="color:black;">
+										{!! $post->body !!}
+								  
+								</div>
+								
+						
                             
                         </div>
                     </div>
@@ -103,7 +129,7 @@
 							
 							</div>
 							
-							<button align="center" type="submit"  class="btn btn-lg my-2 my-sm-0" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
+							<button align="center"  value="comment" type="submit" name="comment" class="btn btn-lg my-2 my-sm-0" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
 							
 					</form>	
 					

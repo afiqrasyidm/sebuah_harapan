@@ -28,6 +28,11 @@ class PostController extends Controller
 		
 		
 		$post = DB::table('posts')
+		
+			->select('posts.id as id','users.id as user_id','users.name', 'posts.created_at as created_at',
+			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
+			 'posts.down_vote as down_vote'
+			 )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
 			 ->where('posts.id', '=', $id)
             ->first();
@@ -43,7 +48,7 @@ class PostController extends Controller
 		}
 	//return $comments ;
 		
-	//	return $post;
+		//dd($post);
     
         return view('belimbing/single-post')->with('post',$post)->with('comments',$comments);
     }
@@ -56,21 +61,71 @@ class PostController extends Controller
 			return redirect()->route('login');
 		
 		}
+		if(Input::get('comment')){
+			
+			$comment = new Comment;
+			$comment->body = Input::get('body');
+			$comment->user_id = Auth::user()->id;
+			$comment->post_id = $id;
+			$comment->up_vote = 0;
+			$comment->down_vote = 0;
+			
+			$comment->save();
+			
+			return redirect()->route('show.single.post', ['id' => $id]);
+		}
+		else if(Input::get('hapus')){
+			$post = Post::find($id);
+			$post->delete();
+			
+			return redirect()->route('home');
+		}
+		//masuk ke text editor
+		else if(Input::get('ubah')){
+			
+			
+			
+			$post = DB::table('posts')
+			 ->select('posts.id as id','users.name', 'posts.created_at as created_at',
+			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
+			 'posts.down_vote as down_vote'
+			 )
+            ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+			 ->where('users.id', '=', Auth::user()->id)
+			 ->where('posts.id', '=', $id)
+			  ->first();
+			
+			
+			
+			
+			return view('belimbing/ubah-post')->with('post',$post);
+		
+		}
+		//untuk final setelah ubah
+		else if(Input::get('ubah_final')){
+			
+			
+			
+			$post = Post::find($id);
+			$post->title = Input::get('title');
 
-		
-     	
-		$comment = new Comment;
-		$comment->body = Input::get('body');
-		$comment->user_id = Auth::user()->id;
-		$comment->post_id = $id;
-		$comment->up_vote = 0;
-		$comment->down_vote = 0;
-		
-		$comment->save();
-		
-		return redirect()->route('show.single.post', ['id' => $id]);
+			$post->body = Input::get('body');
+
+			$post->save();
+			
+			
+				//return "lol";
+			
+			
+			
+			return redirect()->route('show.single.post', ['id' => $id]);
+		}
 		
     }
+	
+	
+	
+	
 	
 	
 	public function ask()
