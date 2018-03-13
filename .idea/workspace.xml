@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e383f904-3897-4323-9a51-98081eb8019c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/LoginController.php" afterPath="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/LoginController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/RegisterController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,11 +58,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/app/Http/Controllers/Auth/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+            <state relative-caret-position="-248">
+              <caret line="33" column="7" lean-forward="true" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/app/Http/Controllers/Auth/RegisterController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="101" column="26" lean-forward="false" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -106,6 +116,7 @@
       <find>submit</find>
       <find>/home</find>
       <find>redi</find>
+      <find>/hom</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -133,6 +144,7 @@
         <option value="$PROJECT_DIR$/protected/resources/views/belimbing/single-post.blade.php" />
         <option value="$PROJECT_DIR$/protected/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/LoginController.php" />
+        <option value="$PROJECT_DIR$/protected/app/Http/Controllers/Auth/RegisterController.php" />
       </list>
     </option>
   </component>
@@ -455,7 +467,7 @@
       <workItem from="1520257652366" duration="6979000" />
       <workItem from="1520777440243" duration="4582000" />
       <workItem from="1520907894719" duration="1564000" />
-      <workItem from="1520911621828" duration="3336000" />
+      <workItem from="1520911621828" duration="4170000" />
     </task>
     <task id="LOCAL-00001" summary="yaa">
       <created>1520778383118</created>
@@ -475,7 +487,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16461000" />
+    <option name="totallyTimeSpent" value="17295000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -652,8 +664,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/app/Http/Controllers/Auth/LoginController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+        <state relative-caret-position="-248">
+          <caret line="33" column="7" lean-forward="true" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/app/Http/Controllers/Auth/RegisterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="101" column="26" lean-forward="false" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
           <folding />
         </state>
       </provider>
