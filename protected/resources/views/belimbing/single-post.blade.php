@@ -37,7 +37,7 @@
  
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
 
 <div class="row">
 	
@@ -49,9 +49,6 @@
                     <div class="media text-muted pt-3">
                         <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
                         <div class="pb-3 mb-0 border-bottom border-gray">
-						
-						
-								
                                 <strong>
                                             Posted by: {{ $post->name }}
                                        
@@ -104,39 +101,36 @@
 					
 					
                     <h3>Jawaban:</h3>
-                    
+					<div class="row">
+                    <div class="col-lg-9">
+
+
 					<form class="form-horizontal" method="post" action="" role="form">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 							<br>
 								
 							<div class="my-3 p-3 bg-white rounded box-shadow">
-								
-								<div class="media text-muted pt-3">
-									
-								
-									
 										  <textarea  id="summernote" name="body"></textarea >
-										  <script>
-											$(document).ready(function() {
-												$('#summernote').summernote();
-											});
-										  </script>
-								  </div>
 								<br>
 								<br>
-							
-							
+
+								<button align="center"  value="comment" type="submit" name="comment" class="btn btn-lg btn-block my-2 my-sm-0" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
 							</div>
 							
-							<button align="center"  value="comment" type="submit" name="comment" class="btn btn-lg my-2 my-sm-0" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
-							
-					</form>	
-					
-					
+					</form>
+
+					</div>
+					</div>
 					 
-					
+
+
                        @foreach($comments as $comment)
+						<div class="row">
+							<div class="col-lg-9">
+
+								<div class="my-3 p-3 bg-white rounded box-shadow">
+
                             <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
 	                        <p class="media-body pb-3 mb-0 small lh-125 ">
 		                        <strong class="d-block text-gray-dark">
@@ -145,28 +139,32 @@
 	
 								</strong>
 								<p> di komen pada: {{ $comment->created_at }}</p>
-		                        <hr  size="30">
-								</br>
+		                        <hr  size="30"/>
+								<br>
 									{!! $comment->body !!}
-		                        </br>
-		                   
+		                        <br>
+
 
 		                    </p>
 
+								</div>
+							</div>
+						</div>
                         @endforeach
-                        
-                    
 
-                    
+				</div>
+		</div>
 
-                </div>            
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+	<script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
 
-        </div>
+                height: 150
 
-      
+            });
+        });
+	</script>
 
-        
-    </div>
-
-
+</div>
 @endsection

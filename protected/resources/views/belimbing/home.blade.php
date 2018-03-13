@@ -69,9 +69,9 @@
                                 </p>
                     </div>
 
-                    <small class="d-block text-right mt-3">
-                        <a href="#">Lihat semua jawaban</a>
-                    </small>
+                    {{--<small class="d-block text-right mt-3">--}}
+                        {{--<a href="#">Lihat semua jawaban</a>--}}
+                    {{--</small>--}}
 
                 </div>
             @endforeach
