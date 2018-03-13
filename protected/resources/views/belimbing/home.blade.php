@@ -29,7 +29,50 @@
                                 <a class="btn btn-md btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab</a>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+
+
+                    <div class="media text-muted pt-3 col-lg-6">
+
+                        @foreach($comments as $thecomment)
+                            @if($thecomment->post_id == $thepost->id)
+                                <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+
+                                    <strong class="d-block text-gray-dark">
+                                        {{--@foreach($users as $theuser)--}}
+                                        {{--@if($theuser->id == $thecomment->user_id)--}}
+                                        {{--{{ $theuser->name }}--}}
+                                        {{--@endif--}}
+                                        {{--@endforeach--}}
+                                    </strong>
+
+                                    {{--{{ $thecomment->body }}--}}
+                                    {!! strip_tags(str_limit($thecomment->body, $limit = 200, $end = '...')) !!}
+                                    <br>
+
+                                    {{--<a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">--}}
+                                        {{--Keren--}}
+                                        {{--<span class="badge badge-pill align-text-bottom">--}}
+                                {{--{{ $thecomment->up_vote }}--}}
+                            {{--</span>--}}
+                                    {{--</a>--}}
+                                    {{--<a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">--}}
+                                        {{--B Aja--}}
+                                        {{--<span class="nampak badge badge-pill align-text-bottom">--}}
+                                    {{--{{ $thecomment->down_vote }}--}}
+                                {{--</span>--}}
+                                    {{--</a>--}}
+                                    @break
+                                    @endif
+                                    @endforeach
+                                </p>
+                    </div>
+
+                    <small class="d-block text-right mt-3">
+                        <a href="#">Lihat semua jawaban</a>
+                    </small>
+
                 </div>
             @endforeach
 {{ $posts->links() }}

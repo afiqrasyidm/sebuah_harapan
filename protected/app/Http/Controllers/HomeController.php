@@ -59,8 +59,14 @@ class HomeController extends Controller
 //		return $posts;
 
 //        return response()->json($Comments, 201);
+//        $posts = Post::all();
+        $users = User::all();
+//        $comments = Comment ::all();
+//        return response()->json($Comments, 201);
+        dd($users);
+        return view('belimbing/home')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
 
-        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
+//        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }
 
     public function test()
