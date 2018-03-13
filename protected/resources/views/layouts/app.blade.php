@@ -42,7 +42,7 @@
 	
 	
     {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-    <a class="btn my-2 my-sm-0" href="{{url('/home')}}">
+    <a class="btn my-2 my-sm-0" href="{{url('/')}}">
 		<img src="{{URL::asset('/image/logo.JPG')}}" alt="profile Pic" height="45" width="160">
 	
 		
