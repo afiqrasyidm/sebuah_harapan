@@ -85,7 +85,7 @@
 					 onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
 					
-					style="color:black;"  class="nav-link" href="{{ url('/home') }}">Beranda <span class="sr-only">(current)</span></a>
+					style="color:black;"  class="nav-link" href="{{ url('/') }}">Beranda <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
