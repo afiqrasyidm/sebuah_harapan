@@ -29,58 +29,44 @@
 	  
     </style>
   
-  
+<br>
 <div class="alert alert-warning">
-  <h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami pertanyaanmu!</h4>
+	<h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami pertanyaan terbaikmu!</h4>
 </div>
 
 <div class="row">
-        <div class="col-lg-12">
+    <div class="col-lg-12">
+    	<div class="my-3 p-3 bg-white rounded box-shadow">
 		
-		<form class="form-horizontal" method="post" action="" role="form">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-				<br>
-				<br>
-				
-		
-				<label>Silahkan pertanyaan anda, bisa dimulai dari apa, kapan, dimana, kenapa, bagaimana, dan lain-lain</label>
-					<br>
+			<form class="form-horizontal" method="post" action="" role="form">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					
-				 <div class="form-group">
-					<input  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" name="title" placeholder="Contoh: Kenapa Belimbing warnanya kuning? " > 
-				  </div>
-			    	
-				<br><br>
-				<label>Silahkan tambahkan deskripsi pendukung, baik gambar atau text yang membuat kamu ingin bertanya mengenai hal ini!(optional)</label>
-					<br>
 					
-				<div class="my-3 p-3 bg-white rounded box-shadow">
-                    
-					<div class="media text-muted pt-3">
 						
+						
+					<div class="form-group">
+						<label>Tuliskan pertanyaan anda, bisa dimulai dari apa, kapan, dimana, kenapa, bagaimana, dan lain-lain.</label>
+						<textarea  pattern=".{18,}"  required title="Minimal 18 Karakter" type="text" class="form-control" name="title" placeholder="Contoh: Kenapa Belimbing warnanya kuning? "></textarea> 
+					</div>
+				    	
+					<div class="form-group">
+						<label>Tambahkan deskripsi pendukung, baik gambar, text atau yang lainnya (opsional).</label>
+						
+						<textarea  id="summernote" name="body"></textarea>
+						<script>
+							$(document).ready(function() {
+								$('#summernote').summernote();
+							});
+						</script>
+	                </div>    
 					
-							<textarea  id="summernote" name="body"></textarea >
-										  <script>
-											$(document).ready(function() {
-												$('#summernote').summernote();
-											});
-										  </script>
-                      </div>
-					<br>
-					<br>
-				
-				
-				</div>
-				
-				<button align="center" type="submit"  class="btn success" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
-				
-		</form>	
-					<br>
-					<br>
+					<button align="center" type="submit" class="btn success" style="color:black; background-color: orange;display: block; margin-right: auto; margin-left: auto;">Simpan Pertanyaan</button>
+					
+			</form>	
+					
+		</div>
 		
-		
-        </div>
+    </div>
 
  </div>
 

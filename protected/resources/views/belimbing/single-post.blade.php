@@ -24,23 +24,25 @@
 
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
 
-  
-    <!-- Create a tag that we will use as the editable area. -->
-    <!-- You can use a div tag as well. -->
-   
- 
-    <!-- Include external JS libs. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
- 
- 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
+
+<!-- Create a tag that we will use as the editable area. -->
+<!-- You can use a div tag as well. -->
+
+
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+
+<!-- share to line -->
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 <div class="row">
 	
@@ -59,7 +61,11 @@
 										{!! $post->body !!}
 								  
 								</div>
+								<br>
 
+								<div class="line-it-button" data-lang="en" data-type="share-a" data-url="http://belimbing.me/post/{{ $post->id }}" style="display: none;"></div>
+								<br>
+								<a href="whatsapp://send?text={{ $post->title }} Jawab disini http://belimbing.me/post/{{ $post->id }}" data-action="share/whatsapp/share" style="text-decoration:none; color:green;"><span class="badge badge-success">Share via Whatsapp</span></a>
 								
 								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
 									<br>
@@ -74,9 +80,9 @@
 										</form>	
 	
 									</div>
-
 								@endif
-								 
+								
+								
 				
                         </div>
                     </div>

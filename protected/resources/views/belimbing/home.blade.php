@@ -12,7 +12,7 @@
                 <div class="my-3 p-3 bg-white rounded box-shadow">
                     <div class="media text-muted pt-3">
                         
-                        <div class="pb-3 mb-0 border-bottom border-gray">
+                        <div class="pb-3 mb-0">
                             <h6>{{ $thepost->name }} </h6>
                             <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" onMouseOver="this.style.color='#878686'" onMouseOut="this.style.color='black'" style="text-decoration: none; color:black;">
                                 <h4> {{ $thepost->title }} </h4>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-
+                    <hr>
                     <div class="media text-muted pt-3">
 
                         @foreach($comments as $thecomment)
@@ -61,9 +61,10 @@
                 </div>
             @endforeach
 
-<!-- Pagination -->
-{{ $posts->links() }}
-
+            <!-- Pagination -->
+            <div style="text-decoration:none; color: orange;">
+                {{ $posts->links() }}
+            </div>
 
         </div>
 
