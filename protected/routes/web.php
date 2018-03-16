@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/ask', 'PostController@ask');
 	Route::get('/myquestion', 'PostController@show_post_uid');
 	Route::post('/ask', 'PostController@ask_post');
-	Route::post('post/{id}', 'PostController@comment_post');
+	
 	Route::get('/home', 'HomeController@index')->name('home');
 		
 });
@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
-
+Route::post('post/{id}', 'PostController@comment_post');
 
 
 Route::get('/test', 'HomeController@test');

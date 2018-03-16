@@ -39,13 +39,7 @@
                                 <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
                                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
 
-                                    <strong class="d-block text-gray-dark">
-                                        {{--@foreach($users as $theuser)--}}
-                                        {{--@if($theuser->id == $thecomment->user_id)--}}
-                                        {{--{{ $theuser->name }}--}}
-                                        {{--@endif--}}
-                                        {{--@endforeach--}}
-                                    </strong>
+                                   
 
                                     {{--{{ $thecomment->body }}--}}
                                     {!! strip_tags(str_limit($thecomment->body, $limit = 200, $end = '...')) !!}

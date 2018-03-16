@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+		//user retentiton rate
         DB::table('users')
             ->where('id', Auth::user()->id)
             ->update(['last_login' => Carbon::now()->toDateTimeString(),
@@ -60,11 +60,11 @@ class HomeController extends Controller
 
 //        return response()->json($Comments, 201);
 //        $posts = Post::all();
-        $users = User::all();
+      //  $users = User::all();
 //        $comments = Comment ::all();
 //        return response()->json($Comments, 201);
-        dd($users);
-        return view('belimbing/home')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
+        
+        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
 
 //        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }

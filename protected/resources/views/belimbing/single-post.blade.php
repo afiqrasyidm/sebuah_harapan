@@ -96,16 +96,33 @@
 
 					
 		
-
-  
-					
-					
-                    <h3>Jawaban:</h3>
-					<div class="row">
-                    <div class="col-lg-9">
-
-
 					<form class="form-horizontal" method="post" action="" role="form">
+					
+					<div class="row">
+						<div class="col-lg-4">
+
+						@if (null ==(Auth::check() ) )
+							<h3>Jawab sebagai <strong>anonim:</strong></h3>
+					
+						@else
+							<h3>Jawab: </h3>
+							<br>
+							
+							 <label for="sel1">Sebagai:</label>
+							 <br>
+							<select name="is_anonim" class="form-control"> 
+							  <option value="0">{{ Auth::user()->name }}</option>
+							  <option value="1">Anonim</option>
+							</select>
+													
+						@endif
+						</div>
+					</div>
+					<div class="row">
+                    <div class="col-lg-12">
+
+					
+
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 							<br>
@@ -134,9 +151,13 @@
                             <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
 	                        <p class="media-body pb-3 mb-0 small lh-125 ">
 		                        <strong class="d-block text-gray-dark">
+								
+									@if ( $comment->is_anonim == 0  )
 		                                    {{ $comment->name }}
-		                             
-	
+		                            @else
+											Anonim
+									@endif	
+										
 								</strong>
 								<p> di komen pada: {{ $comment->created_at }}</p>
 		                        <hr  size="30"/>

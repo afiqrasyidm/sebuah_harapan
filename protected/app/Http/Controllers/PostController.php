@@ -56,16 +56,24 @@ class PostController extends Controller
 	 public function comment_post($id)
     {
 		
-		if(!Auth::check()){
-			
-			return redirect()->route('login');
-		
-		}
 		if(Input::get('comment')){
 			
+			
 			$comment = new Comment;
+			
+			if(!Auth::check()){
+				//hardcode anonim user
+				$comment->user_id = 27;
+			}
+
+			else{
+				//kalau udah login di cek apakah dia milih anonim apa nama dia sendiri			
+				
+				$comment->user_id = Auth::user()->id;
+				$comment->is_anonim =   Input::get('is_anonim');
+				
+			}
 			$comment->body = Input::get('body');
-			$comment->user_id = Auth::user()->id;
 			$comment->post_id = $id;
 			$comment->up_vote = 0;
 			$comment->down_vote = 0;
