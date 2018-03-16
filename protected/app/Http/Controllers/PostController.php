@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Comment;
+use App\Post_like;
 
 use Auth;
 use App;
@@ -34,7 +35,7 @@ class PostController extends Controller
 			 'posts.down_vote as down_vote'
 			 )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-			 ->where('posts.id', '=', $id)
+			->where('posts.id', '=', $id)
             ->first();
 		
 		$comments = DB::table('comments')
@@ -54,7 +55,8 @@ class PostController extends Controller
     }
 	
 	 public function comment_post($id)
-    {
+    {	
+	
 		
 		if(Input::get('comment')){
 			

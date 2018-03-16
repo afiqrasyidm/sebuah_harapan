@@ -17,10 +17,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -29,15 +25,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-		//user retentiton rate
-        DB::table('users')
-            ->where('id', Auth::user()->id)
-            ->update(['last_login' => Carbon::now()->toDateTimeString(),
-			'login_count' => DB::raw('login_count + 1'),
-			
-			
-			]);
-		
+	
+		if(Auth::check()){
+					//user retentiton rate
+					DB::table('users')
+						->where('id', Auth::user()->id)
+						->update(['last_login' => Carbon::now()->toDateTimeString(),
+						'login_count' => DB::raw('login_count + 1'),
+					
+					
+					]);
+				
+			}
+
+	
 		
 		
 		$posts = DB::table('posts')

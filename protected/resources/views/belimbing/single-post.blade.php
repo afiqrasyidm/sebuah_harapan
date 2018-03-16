@@ -86,7 +86,24 @@
 										{!! $post->body !!}
 								  
 								</div>
+							<div class="text-right">
+							
+								<form class="form-horizontal" method="post" action="" role="form">
 								
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button   type="submit" name="menarik"   class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">
+										Menarik
+										<span class="badge badge-pill align-text-bottom">{{ $post->up_vote }}</span>
+									</button>
+									<button   type="submit" name="tidak_menarik"   class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">
+										Tidak Menarik
+										<span class="nampak badge badge-pill align-text-bottom">
+											{{ $post->down_vote }}
+										</span>
+									</button>
+								</form>	
+								
+							</div>
 						
                             
                         </div>
@@ -164,7 +181,8 @@
 								<br>
 									{!! $comment->body !!}
 		                        <br>
-
+								
+							
 
 		                    </p>
 

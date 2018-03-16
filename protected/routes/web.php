@@ -15,7 +15,7 @@
 ////    return view('belimbing/home');
 //});
 
-Route::get('/', 'PublicController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/kritik', 'PublicController@kritik');
 
 Route::group(['middleware' => ['auth']], function () { 
@@ -24,10 +24,11 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/myquestion', 'PostController@show_post_uid');
 	Route::post('/ask', 'PostController@ask_post');
 	
-	Route::get('/home', 'HomeController@index')->name('home');
 		
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+	
 Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();
