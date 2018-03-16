@@ -34,6 +34,18 @@ class PublicController extends Controller
 
         return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }
+
+
+
+    public function allUser()
+    {
+
+		$users = DB::table('users')->orderBy('created_at','DESC')->get();;
+
+		$total = DB::table('users')->count();
+			
+		return view('belimbing/all-user')->with('users', $users)->with('total', $total);
+    }    
 	
 	 
 

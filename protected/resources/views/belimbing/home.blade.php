@@ -13,17 +13,12 @@
                     <div class="media text-muted pt-3">
                         
                         <div class="pb-3 mb-0">
-                            <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" 
-							
-							onMouseOver="this.style.color='#878686'"
-							onMouseOut="this.style.color='black'" 
-							
-							style="text-decoration: none;color:black;"
-							
-							>
-                                <h1> {{ $thepost->title }} </h1>
+                            <h6>{{ $thepost->name }} </h6>
+                            <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" onMouseOver="this.style.color='#878686'" onMouseOut="this.style.color='black'" style="text-decoration: none; color:black;">
+                                <h4> {{ $thepost->title }} </h4>
                             </a>
-							<p>oleh {{ $thepost->name }} pada {{ $thepost->created_at }}</p>
+
+							<p style="font-size:small; font-style: italic;">{{ $thepost->created_at }}</p>
 							
                             <div class="text-left">
                                 <a class="btn btn-md btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab</a>
@@ -31,36 +26,32 @@
                         </div>
                     </div>
 
-
-                    <div class="media text-muted pt-3 col-lg-6">
+                    <hr>
+                    <div class="media text-muted pt-3">
 
                         @foreach($comments as $thecomment)
                             @if($thecomment->post_id == $thepost->id)
-                                <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-
-                                   
-
-                                    {{--{{ $thecomment->body }}--}}
-                                    {!! strip_tags(str_limit($thecomment->body, $limit = 200, $end = '...')) !!}
-                                    <br>
-
-                                    {{--<a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">--}}
-                                        {{--Keren--}}
-                                        {{--<span class="badge badge-pill align-text-bottom">--}}
-                                {{--{{ $thecomment->up_vote }}--}}
-                            {{--</span>--}}
-                                    {{--</a>--}}
-                                    {{--<a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">--}}
-                                        {{--B Aja--}}
-                                        {{--<span class="nampak badge badge-pill align-text-bottom">--}}
-                                    {{--{{ $thecomment->down_vote }}--}}
-                                {{--</span>--}}
-                                    {{--</a>--}}
-                                    @break
-                                    @endif
-                                    @endforeach
+                                
+                                <p>
+                                   {!! strip_tags(str_limit($thecomment->body, $limit = 200, $end = '...')) !!}
                                 </p>
+                                   
+                                        {{--<a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">--}}
+                                            {{--Keren--}}
+                                            {{--<span class="badge badge-pill align-text-bottom">--}}
+                                        {{--{{ $thecomment->up_vote }}--}}
+                                         {{--</span>--}}
+                                        {{--</a>--}}
+                                        {{--<a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">--}}
+                                            {{--B Aja--}}
+                                            {{--<span class="nampak badge badge-pill align-text-bottom">--}}
+                                        {{--{{ $thecomment->down_vote }}--}}
+                                         {{--</span>--}}
+                                        {{--</a>--}}
+                                @break
+                            @endif
+                        @endforeach
+                                
                     </div>
 
                     {{--<small class="d-block text-right mt-3">--}}
@@ -69,8 +60,11 @@
 
                 </div>
             @endforeach
-{{ $posts->links() }}
 
+            <!-- Pagination -->
+            <div style="text-decoration:none; color: orange;">
+                {{ $posts->links() }}
+            </div>
 
         </div>
 
