@@ -1,20 +1,23 @@
 @extends('layouts.app')
 @section('content')
+
+<br>
 <div class="alert alert-warning">
-  @if(null !=(Auth::check() ))
+  	@if(null !=(Auth::check() ))
 		<h4>Hai {{ Auth::user()->name }}, tunjukkan pada kami jawaban terbaikmu!</h4>
-    @else
+  	@else
 		<h4>Hai Belimbingers, tunjukkan pada kami jawaban terbaikmu!</h4>
 	@endif
 
 </div>
+
 <style>
       .popover-content, .note-children-container{
 			display: none;
 			
 	  }
 	  
-    </style>
+</style>
 
 
 
@@ -41,136 +44,99 @@
 
 <div class="row">
 	
-
-	
-	
-        <div class="col-lg-12">
+        <div class="col-md-12">
 			    <div class="my-3 p-3 bg-white rounded box-shadow">
                     <div class="media text-muted pt-3">
-                        <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                        <div class="pb-3 mb-0 border-bottom border-gray">
-                                <strong>
-                                            Posted by: {{ $post->name }}
-                                       
-                                </strong>
-                                <br>
-								  <br>
-                                <h1 
-									style="color:black;">
-                                    {{ $post->title }}
-                                </h1>
-								
-								
-								
-								<p> Oleh {{ $post->created_at }}</p>
-								
-								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
-								<div class="text-left">
-							
-									<form class="form-horizontal" method="post" action="" role="form">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<button  type="submit" name="ubah"  value="ubah" class="btn btn-outline-warning my-2 my-sm-0">Ubah</button>
-									
-										<button  type="submit" name="hapus"  value="hapus" class="btn btn-outline-danger my-2 my-sm-0">Hapus</button>
-											
-									</form>	
-					
-					
-								</div>
-								
-								
-								@endif
-								  <br>
-								    <br>
+                        <div class="pb-3 mb-0">
+                                
+                                <h6>{{ $post->name }} </h6>
+                                
+                                <h4 style="color:black;">{{ $post->title }}</h4>
+																
+								<p style="font-size:small; font-style: italic;">{{ $post->created_at }}</p>
+
 								<div style="color:black;">
 										{!! $post->body !!}
 								  
 								</div>
+
 								
-						
-                            
+								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
+									<br>
+									<div class="text-left">
+								
+										<form class="form-horizontal" method="post" action="" role="form">
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											<button  type="submit" name="ubah"  value="ubah" class="btn btn-outline-warning my-2 my-sm-0">Ubah Pertanyaan</button>
+										
+											<button  type="submit" name="hapus"  value="hapus" class="btn btn-outline-danger my-2 my-sm-0">Hapus Pertanyaan</button>
+												
+										</form>	
+	
+									</div>
+
+								@endif
+								 
+				
                         </div>
                     </div>
-					<br>
-					<br>
-
-					
-		
-					<form class="form-horizontal" method="post" action="" role="form">
-					
+										
 					<div class="row">
-						<div class="col-lg-4">
+		                <div class="col-md-12">
 
-						@if (null ==(Auth::check() ) )
-							<h3>Jawab sebagai <strong>anonim:</strong></h3>
+							<form class="form-horizontal" method="post" action="" role="form">
+									<h4>Jawab: </h4>
+									@if (Auth::check())
+										
+										<label for="sel1">Jawab sebagai:</label>
+										<div class="col-md-4">
+											<select name="is_anonim" class="form-control"> 
+											  <option value="0">{{ Auth::user()->name }}</option>
+											  <option value="1">Anonim</option>
+											</select>
+											
+										</div>
+										<br>							
+									@endif
+																
+
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					
-						@else
-							<h3>Jawab: </h3>
-							<br>
-							
-							 <label for="sel1">Sebagai:</label>
-							 <br>
-							<select name="is_anonim" class="form-control"> 
-							  <option value="0">{{ Auth::user()->name }}</option>
-							  <option value="1">Anonim</option>
-							</select>
-													
-						@endif
+									<div>
+										<textarea  id="summernote" name="body"></textarea >
+										
+										<br>
+
+										<button align="center" value="comment" type="submit" name="comment" class="btn btn-lg btn-block my-2 my-sm-0" style="color:black; background-color: orange;display: block; margin-right: auto; margin-left: auto;">Simpan Jawaban</button>
+									</div>
+										
+							</form>
+
 						</div>
-					</div>
-					<div class="row">
-                    <div class="col-lg-12">
-
-					
-
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-							<br>
-								
-							<div class="my-3 p-3 bg-white rounded box-shadow">
-										  <textarea  id="summernote" name="body"></textarea >
-								<br>
-								<br>
-
-								<button align="center"  value="comment" type="submit" name="comment" class="btn btn-lg btn-block my-2 my-sm-0" style="color:black; background-color: yellow;display: block; margin-right: auto; margin-left: auto;"  >Submit</button>
-							</div>
-							
-					</form>
-
-					</div>
 					</div>
 					 
 
-
+					<!-- Jawaban dari pertanyaan -->
+					<br>
+					<h4>Jawaban: </h4>
+					<br>
                        @foreach($comments as $comment)
-						<div class="row">
-							<div class="col-lg-9">
+							<div class="row">
+								<div class="col-md-12">
+									
+									<h5>	
+										@if ($comment->is_anonim = 0)
+			                                    {{ $comment->name }}
+			                            @else
+												Anonim
+										@endif				
+									</h5>
+									<p style="font-size:small; font-style: italic;"> answered on {{ $comment->created_at }}</p>
+			                        <p> {!! $comment->body !!} </p>
 
-								<div class="my-3 p-3 bg-white rounded box-shadow">
-
-                            <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-	                        <p class="media-body pb-3 mb-0 small lh-125 ">
-		                        <strong class="d-block text-gray-dark">
-								
-									@if ( $comment->is_anonim == 0  )
-		                                    {{ $comment->name }}
-		                            @else
-											Anonim
-									@endif	
-										
-								</strong>
-								<p> di komen pada: {{ $comment->created_at }}</p>
-		                        <hr  size="30"/>
-								<br>
-									{!! $comment->body !!}
-		                        <br>
-
-
-		                    </p>
-
+									<hr  size="30"/>
 								</div>
 							</div>
-						</div>
                         @endforeach
 
 				</div>
@@ -181,7 +147,7 @@
         $(document).ready(function() {
             $('#summernote').summernote({
 
-                height: 150
+                height: 100
 
             });
         });

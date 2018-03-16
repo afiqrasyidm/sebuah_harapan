@@ -50,26 +50,24 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-white bg-white">
 	
 	
-	
-    {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-    <a class="btn my-2 my-sm-0" href="{{url('/')}}">
-		<img src="{{URL::asset('/image/logo.JPG')}}" alt="profile Pic" height="45" width="160">
-	
-		
-		</a>
-    {{--</a>--}}
+	<!-- logo -->
+    <a class="navbar-brand" href="{{ url('/') }}">
+        <img class="img-responsive" src="{{URL::asset('/image/logo2.jpg')}}" alt="profile Pic">
+    </a>
+   
+   <!-- tombol menu untuk mobile view -->
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" style="color:black;">
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" style="color:black; font-weight: bold; font-size: large;">
         <ul class="navbar-nav mr-auto">
             @guest
-            <li class="nav-item active"> 
+            <li class="nav-item"> 
                 <a 
 				onMouseOver="this.style.color='#878686'"
 				onMouseOut="this.style.color='black'" 
-				style="color:black; margin-left:10px;"  class="nav-link" href="{{ url('/') }}">Beranda<span class="sr-only">(current)</span></a>
+				style="color:black; margin-left:10px;"  class="nav-link" href="{{ url('/') }}">Home<span class="sr-only">(current)</span></a>
             </li>
          
 			
@@ -78,38 +76,38 @@
                 <a 
 				onMouseOver="this.style.color='#878686'"
 				onMouseOut="this.style.color='black'" 
-				style="color:black;" class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/login') }}">Masuk</a>
+				class="btn btn-outline-warning my-2 my-sm-0" style="color:black; font-weight: bold;" href="{{ url('/login') }}">Log In</a>
             </li>
             <li class="nav-item">
                 <a 
 				onMouseOver="this.style.color='#878686'"
 				onMouseOut="this.style.color='black'" 
-				style="color:black;" class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Daftar</a>
+				style="color:black; font-weight: bold;" class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Register</a>
 
             </li>
             @else
                
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a 
 					
 					 onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
 					
-					style="color:black;"  class="nav-link" href="{{ url('/') }}">Beranda <span class="sr-only">(current)</span></a>
+					style="color:black;"  class="nav-link" href="{{ url('/') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
                     <a 
 					onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
-					style="color:black;" class="nav-link" href="{{ url('/myquestion') }}">Pertanyaan saya </a>
+					style="color:black;" class="nav-link" href="{{ url('/myquestion') }}">My Question</a>
                 </li>
                
                 <li class="nav-item">
                     <a 
 					onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
-					style="color:black;" class="nav-link" href="{{ url('/ask') }}">Tambah Pertanyaan </a>
+					style="color:black;" class="nav-link" href="{{ url('/ask') }}">Add Question</a>
                 </li>
 				
                 
@@ -117,7 +115,7 @@
                     <a 
 					onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
-					class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/logout') }}">Keluar</a>
+					class="btn btn-outline-warning my-2 my-sm-0" style="color:black; font-weight: bold;" href="{{ url('/logout') }}">Log Out</a>
                 </li>
                
                 
@@ -126,18 +124,14 @@
         </ul>
        
     </div>
-	
-	
 </nav>
-<br>
-<br>
-       
-               
+
+</br>
 
 <main role="main" class="container">
-    <div class="row">
-        @yield('content')
-    </div>
+   
+   @yield('content')
+   
 </main>
     
  <!-- Bootstrap core JavaScript
