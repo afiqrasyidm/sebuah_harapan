@@ -64,6 +64,7 @@ class PostController extends Controller
 			if(!Auth::check()){
 				//hardcode anonim user
 				$comment->user_id = 27;
+				$comment->is_anonim = 0;
 			}
 
 			else{
