@@ -10,6 +10,10 @@
 
             @foreach($posts as $thepost)
                 <div class="my-3 p-3 bg-white rounded box-shadow">
+					<div  class="float-right">
+						<p style="font-size:small; font-color: Times;"> disukai oleh: {{ $thepost->count_like }}</p>
+                        
+					</div>
                     <div class="media text-muted pt-3">
                         
                         <div class="pb-3 mb-0">
@@ -20,7 +24,7 @@
 
 							<p style="font-size:small; font-style: italic;">{{ $thepost->created_at }}</p>
 							
-                            <div class="text-left">
+						    <div class="text-left">
                                 <a class="btn btn-md btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab</a>
                             </div>
                         </div>
