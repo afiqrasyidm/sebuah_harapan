@@ -43,7 +43,29 @@ class PostController extends Controller
 			->orderBy('comments.created_at','DESC')
 			 ->where('comments.post_id', '=', $id)
             ->get();
-	
+			
+		$post_likes_count = DB::table('post_likes')
+			 ->where('post_likes.post_id', '=', $id)
+			 ->where('flag_vote', '=',1)
+			 ->count();
+			 
+
+		
+		$post_likes_flag_user = null;
+		if(Auth::check()){
+				//ambil apakah user tersebut sudah likes apa belum kalau hasil 1 likes, 2 unlikes
+				$post_likes_flag_user = DB::table('post_likes')
+				->where('post_likes.post_id', '=', $id)
+				->where('user_id', '=', Auth::user()->id)
+				->first();
+				
+			
+			
+
+		}
+
+//		return $post_likes_flag_user;
+		
 		if($post == NULL){
 			abort(404);
 		}
@@ -51,12 +73,15 @@ class PostController extends Controller
 		
 		//dd($post);
     
-        return view('belimbing/single-post')->with('post',$post)->with('comments',$comments);
-    }
+        return view('belimbing/single-post')->with('post',$post)->with('comments',$comments)
+		->with('post_likes_count',$post_likes_count)
+		->with('post_likes_flag_user',$post_likes_flag_user);
+  
+	}
 	
 	 public function comment_post($id)
     {	
-	
+		
 		
 		if(Input::get('comment')){
 			
@@ -234,4 +259,42 @@ class PostController extends Controller
 
         return response()->json(null, 204);
     }
+	public function up_vote(Request $request)
+    {
+		
+	
+	  if($request->action == 1){
+		$post_like = new Post_like;
+		$post_like->user_id =Auth::user()->id;
+		$post_like->post_id = $request->post_id;
+		$post_like->flag_vote = 1;
+		$post_like->save();
+	  }
+	  else{
+		  $post_like = Post_like::where('user_id', Auth::user()->id)
+						->where('post_id', $request->post_id)
+						->delete();
+	  }
+		
+		
+		$post_likes_count = DB::table('post_likes')
+			 ->where('post_likes.post_id', '=', $request->post_id)
+			 ->where('flag_vote', '=',1)
+			 ->count();
+			 
+			 
+        $response = array(
+			'status' => "saved" ,
+			'msg'    => 'Setting created successfully',
+			'post_likes_count' =>$post_likes_count,
+		);
+
+		return  \Response::json($response);
+    }
+	
+	
+	
+	
+	
+	
 }

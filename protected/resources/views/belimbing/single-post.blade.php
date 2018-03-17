@@ -43,17 +43,53 @@
 
 <!-- share to line -->
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="row">
 	
         <div class="col-md-12">
 			    <div class="my-3 p-3 bg-white rounded box-shadow">
+				
+						<div  class="float-right">
+							
+										<form class="form-horizontal" method="post" action="" role="form">
+										
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											
+													
+													@if($post_likes_flag_user != NULL )
+														<input type="button" id= "upvote"  value = "Liked  {{$post_likes_count}} " name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														
+														<input type="button" id= "flag_user_like"  hidden value = "1" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+													@else
+														<input type="button" id= "upvote"  value = "Like? {{$post_likes_count}}" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+												
+														<input type="button" id= "flag_user_like"  hidden value = "0" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														
+													@endif
+														
+										</form>	
+										
+						</div>
                     <div class="media text-muted pt-3">
                         <div class="pb-3 mb-0">
                                 
+								
+								
+								
+								
+								
+								
+								
+								
+								
                                 <h6>{{ $post->name }} </h6>
                                 
                                 <h4 style="color:black;">{{ $post->title }}</h4>
+								
+								
+								
+								
+								
 																
 								<p style="font-size:small; font-style: italic;">{{ $post->created_at }}</p>
 
@@ -71,7 +107,7 @@
 								
 								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
 									<br>
-									<div class="text-left">
+									<div class="text-left"    >
 								
 										<form class="form-horizontal" method="post" action="" role="form">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -85,9 +121,14 @@
 								@endif
 								
 								<br>
+								
+									
+								
 				
 
                         </div>
+						
+						
                     </div>
 										
 					<div class="row">
@@ -164,6 +205,85 @@
             });
         });
 	</script>
+	
+	
+	<script > 
+
+    $(function(){ 
+       
+        $(".up_vote").on('click', function(){ 
+            
+			var value = $( "#flag_user_like" ).val();
+			
+			//action yang harus dilakukan kalau 0 delete dan berarti udah pernah like, 1 insert belum like
+			var action = 1; 
+		//	alert(value);
+			if(value == 1){
+				action = 0;
+			}
+			
+			//alert (value);
+			
+			
+			//alert("Hello! I am an alert box!");
+            $.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			
+			var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+			//alert(AuthUser);
+			if("" === AuthUser ){
+				window.location.href = '../login'; 
+			}
+			
+			
+			
+            $.ajax({ 
+				
+				 
+				
+				method: 'POST', // Type of response and matches what we said in the route
+				url: 'upvote', // This is the url we gave in the route
+				data: {
+					'_token': $('input[name="_token"]').val(),
+					'up_vote': true,
+					'action' :action,
+					'post_id':  {{$post->id}},
+				},
+				 // a JSON object to send back
+				success: function(response){ // What to do if we succeed
+					console.log(response);
+
+					if(action == 0) {
+						$('#flag_user_like').val(0);
+						$('.up_vote').val("Like? " + response.post_likes_count);
+					}
+					else{
+						$('#flag_user_like').val(1);
+						$('.up_vote').val("Liked " + response.post_likes_count);
+					}
+					
+				},
+				error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+					console.log(JSON.stringify(jqXHR));
+					console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+					//alert("");
+				}
+				
+				 
+   
+          });
+ 
+       });
+	   
+	});
+
+    </script> 
+	
+	
+	
 
 </div>
 @endsection
