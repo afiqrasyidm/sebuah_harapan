@@ -177,7 +177,7 @@
 								<div class="col-md-12">
 									
 									<h5>	
-										@if ($comment->is_anonim = 0)
+										@if ($comment->is_anonim == 0)
 			                                    {{ $comment->name }}
 			                            @else
 												Anonim
