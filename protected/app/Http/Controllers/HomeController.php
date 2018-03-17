@@ -44,24 +44,27 @@ class HomeController extends Controller
 		$posts = DB::table('posts')
 			 ->select('posts.id as id','users.name', 'posts.created_at as created_at',
 			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
-			 'posts.down_vote as down_vote',  DB::raw('count(post_likes.id) as count_like'))
+			 'posts.down_vote as down_vote',  
+			
+			DB::raw("(SELECT body FROM comments
+                          WHERE comments.post_id = posts.id ORDER BY comments.created_at DESC LIMIT 1
+                        ) as comments_body"),
+			 
+			 DB::raw('count(post_likes.id) as count_like'))
 			
              ->leftJoin('users', 'posts.user_id', '=', 'users.id')
 			 ->leftJoin('post_likes', 'post_likes.post_id', '=', 'posts.id')
 			 
+			 
 
 			   
 			 ->groupBy('posts.id' )
-			 ->orderBy('posts.created_at','DESC')
+			 ->orderBy('posts.created_at', 'comments.created_at','DESC')
 			 
             ->paginate(10);
 			
-		$comments = DB::table('comments')
 		
-			->orderBy('comments.created_at','DESC')
-            ->get();
-		
-	//	dd($posts);	
+		//dd($posts);	
 
 //        return response()->json($Comments, 201);
 //        $posts = Post::all();
@@ -69,7 +72,7 @@ class HomeController extends Controller
 //        $comments = Comment ::all();
 //        return response()->json($Comments, 201);
         
-        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
+        return view('belimbing/home')->with('posts',$posts);
 
 //        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }

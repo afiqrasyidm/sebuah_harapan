@@ -33,28 +33,13 @@
                     <hr>
                     <div class="media text-muted pt-3">
 
-                        @foreach($comments as $thecomment)
-                            @if($thecomment->post_id == $thepost->id)
-                                
+                               
                                 <p>
-                                   {!! strip_tags(str_limit($thecomment->body, $limit = 200, $end = '...')) !!}
+                                   {!! strip_tags(str_limit($thepost->comments_body, $limit = 200, $end = '...')) !!}
                                 </p>
                                    
-                                        {{--<a class="btn btn-sm btn-outline-success my-2 my-sm-0" href="#">--}}
-                                            {{--Keren--}}
-                                            {{--<span class="badge badge-pill align-text-bottom">--}}
-                                        {{--{{ $thecomment->up_vote }}--}}
-                                         {{--</span>--}}
-                                        {{--</a>--}}
-                                        {{--<a class="btn btn-sm btn-outline-info my-2 my-sm-0" href="#">--}}
-                                            {{--B Aja--}}
-                                            {{--<span class="nampak badge badge-pill align-text-bottom">--}}
-                                        {{--{{ $thecomment->down_vote }}--}}
-                                         {{--</span>--}}
-                                        {{--</a>--}}
-                                @break
-                            @endif
-                        @endforeach
+                                        
+                              
                                 
                     </div>
 
