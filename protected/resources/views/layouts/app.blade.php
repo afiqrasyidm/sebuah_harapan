@@ -87,13 +87,7 @@
 				onMouseOut="this.style.color='black'" 
 				class="btn btn-outline-warning my-2 my-sm-0" style="color:black; " href="{{ url('/login') }}">Log In</a>
             </li>
-            <li class="nav-item">
-                <a 
-				onMouseOver="this.style.color='#878686'"
-				onMouseOut="this.style.color='black'" 
-				style="color:black; " class="btn btn-outline-warning my-2 my-sm-0" href="{{ url('/register') }}">Register</a>
-
-            </li>
+           
             @else
                
                
@@ -126,8 +120,6 @@
        
     </div>
 </nav>
-
-</br>
 
 <main role="main" class="container">
    
