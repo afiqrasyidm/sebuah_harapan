@@ -37,7 +37,7 @@ body, html {
                     </div>
 
                     <div class="row justify-content-center">
-                        <h6 class="p-2" style="text-align:center;">Disini tempat untuk berbagi ilmu, tawa, dan keingintahuan</h6>
+                        <h6 class="p-2" style="text-align:center;">"Disini tempat untuk berbagi ilmu, tawa, dan keingintahuan"</h6>
                     </div>
 
                     <br>
