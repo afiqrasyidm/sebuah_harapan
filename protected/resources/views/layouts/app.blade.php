@@ -51,7 +51,7 @@
 	
 	
 	<!-- logo -->
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand" href="{{ url('/home') }}">
         <img class="img-responsive" src="{{URL::asset('/image/logo2.jpg')}}" alt="profile Pic">
     </a>
    
@@ -68,7 +68,7 @@
 					 onMouseOver="this.style.color='#878686'"
 					onMouseOut="this.style.color='black'" 
 					
-					style="color:black;"  class="nav-link" href="{{ url('/') }}">Beranda</a>
+					style="color:black;"  class="nav-link" href="{{ url('/home') }}">Beranda</a>
                 </li>
 			<li class="nav-item"> 
                 <a 

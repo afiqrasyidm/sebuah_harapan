@@ -192,14 +192,14 @@
 			                        <p> {!! $comment->body !!} </p>
 
 									
-								@if (null !=(Auth::check() ) &&  Auth::user()->id == $post->user_id )
+								@if (null !=(Auth::check() ) &&  Auth::user()->id == $comment->user_id )
 										<br>
 										<div class="text-left"    >
 									
 											<form class="form-horizontal" method="post" action="" role="form">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											
-												<button  type="submit" name="hapus_comment"  value='{{ $comment->id }}' class="btn btn-outline-danger my-2 my-sm-0">Hapus Pertanyaan</button>
+												<button  type="submit" name="hapus_comment"  value='{{ $comment->id }}' class="btn btn-outline-danger my-2 my-sm-0">Hapus Komentar</button>
 													
 											</form>	
 		
