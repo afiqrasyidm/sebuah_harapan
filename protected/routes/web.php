@@ -16,7 +16,7 @@
 //});
 
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@login_homepage');
 
 Route::get('/userrr', 'PublicController@allUser');
 

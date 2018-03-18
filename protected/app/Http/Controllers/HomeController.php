@@ -150,4 +150,9 @@ class HomeController extends Controller
 
         return view('belimbing/test')->with('posts',$posts)->with('users',$users)->with('comments',$comments);
     }
+	public function login_homepage() {
+		return redirect('login');
+ 
+	}
+	
 }
