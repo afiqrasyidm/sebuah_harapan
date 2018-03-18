@@ -170,7 +170,7 @@
 
 					<!-- Jawaban dari pertanyaan -->
 					<br>
-					<h4 id="jawaban">Jawaban: </h4>
+					<h4 id="jawaban">Jawaban ({{ $post->comments_count}} ) </h4>
 					<br>
                        @foreach($comments as $comment)
 							<div class="row">

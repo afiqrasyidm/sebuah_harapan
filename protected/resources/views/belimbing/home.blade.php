@@ -33,9 +33,12 @@
                     @if($thepost->comments_body != null)
                         <hr>
                         <div class="media text-muted">
-                            <p>
-                               {!! strip_tags(str_limit($thepost->comments_body, $limit = 200, $end = '...')) !!}
-                            </p>    
+                            <div class="py-0">
+                                <span style="font-size:small; font-style: italic;">1 dari {{ $thepost->comments_count }} jawaban</span>
+                                <p>
+                                   {!! strip_tags(str_limit($thepost->comments_body, $limit = 200, $end = '...')) !!}
+                                </p>    
+                            </div>
                                     
                         </div>
 

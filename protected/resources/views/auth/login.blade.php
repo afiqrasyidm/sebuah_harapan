@@ -2,6 +2,31 @@
 
 @section('content')
 
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    background-image: url("{{URL::asset('/image/back2.jpeg')}}");
+    background-size: auto 100%;
+}
+
+
+
+#bg {
+    /* The image used */
+    
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+<br>
+<div id="bg"></div>
 <div class="container"> 
         <div class="col-md-8 offset-md-2">
             <div class="my-5 p-4 bg-white rounded box-shadow">
