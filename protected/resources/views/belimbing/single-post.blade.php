@@ -15,18 +15,8 @@
       .popover-content, .note-children-container{
 			display: none;
 			
-	  }
-	  
+	  } 
 </style>
-
-
-
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
-
-
 
 <!-- Create a tag that we will use as the editable area. -->
 <!-- You can use a div tag as well. -->
@@ -42,7 +32,17 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
 <!-- share to line -->
-<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>	
+
+
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="row">
 	
@@ -57,11 +57,11 @@
 											
 													
 													@if($post_likes_flag_user != NULL )
-														<input type="button" id= "upvote"  value = "Disukai  {{$post_likes_count}} " name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														<input type="button" id= "upvote"  value = "Disukai  ({{$post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
 														<input type="button" id= "flag_user_like"  hidden value = "1" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 													@else
-														<input type="button" id= "upvote"  value = "Suka? {{$post_likes_count}}" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														<input type="button" id= "upvote"  value = "Suka ({{$post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 												
 														<input type="button" id= "flag_user_like"  hidden value = "0" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
@@ -170,7 +170,7 @@
 
 					<!-- Jawaban dari pertanyaan -->
 					<br>
-					<h4>Jawaban: </h4>
+					<h4 id="jawaban">Jawaban: </h4>
 					<br>
                        @foreach($comments as $comment)
 							<div class="row">
@@ -188,7 +188,7 @@
 												Anonim
 										@endif				
 									</h5>
-									<p style="font-size:small; font-style: italic;"> answered on {{ $comment->created_at }}</p>
+									<p style="font-size:small; font-style: italic;"> {{ $comment->created_at }}</p>
 			                        <p> {!! $comment->body !!} </p>
 
 									
@@ -232,7 +232,7 @@
 	</script>
 	
 	
-	<script > 
+	<script> 
 
     $(function(){ 
        
@@ -283,11 +283,11 @@
 
 					if(action == 0) {
 						$('#flag_user_like').val(0);
-						$('.up_vote').val("Suka? " + response.post_likes_count);
+						$('.up_vote').val("Suka (" + response.post_likes_count + ")");
 					}
 					else{
 						$('#flag_user_like').val(1);
-						$('.up_vote').val("Disukai " + response.post_likes_count);
+						$('.up_vote').val("Disukai (" + response.post_likes_count + ")");
 					}
 					
 				},
@@ -308,7 +308,7 @@
     </script> 
 	
 	
-	
+
 
 </div>
 @endsection

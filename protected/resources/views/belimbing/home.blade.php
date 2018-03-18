@@ -4,61 +4,57 @@
 
 
 <div class="row">
-        <div class="col-lg-9">
-			<br>
-			<br>
-          <h3>{{$judul}} Saat Ini</h3>
-			<br>
+        <div class="col-lg-9 mt-3">
+			
+            <h3>{{ $judul }} Saat Ini</h3>
+            
+            
             @foreach($posts as $thepost)
                 <div class="my-3 p-3 bg-white rounded box-shadow">
-					<div  class="float-right">
-						<p style="font-size:small; font-color: Times;"> disukai oleh: {{ $thepost->count_like }}</p>
-                        
-					</div>
-                    <div class="media text-muted pt-3">
-                        
-                        <div class="pb-3 mb-0">
-                            <h6>{{ $thepost->name }} </h6>
-                            <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" onMouseOver="this.style.color='#878686'" onMouseOut="this.style.color='black'" style="text-decoration: none; color:black;">
-                                <h4> {{ $thepost->title }} </h4>
-                            </a>
-
-							<p style="font-size:small; font-style: italic;">{{ $thepost->created_at }}</p>
-							
-						    <div class="text-left">
+                    <div class="media text-muted">
+                        <div class="py-0 px-2">
+                            <div class="row">
+                                <h6>{{ $thepost->name }} </h6>
+                            </div>
+                            <div class="row">
+                                <a href="{{ route('show.single.post', ['id' => $thepost->id]) }}" onMouseOver="this.style.color='#878686'" onMouseOut="this.style.color='black'" style="text-decoration: none; color:black;">
+                                    <h4> {{ $thepost->title }} </h4>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <p style="font-size:small; font-style: italic;">{{ $thepost->created_at }} @if($thepost->count_like > 0)| Disukai oleh {{ $thepost->count_like }} orang @endif</p>
+							</div>
+						    <div class="row">
                                 <a class="btn btn-md btn-outline-dark my-2 my-sm-0" href="{{ route('show.single.post', ['id' => $thepost->id]) }}">Jawab</a>
                             </div>
                         </div>
                     </div>
 
-                    <hr>
-                    <div class="media text-muted pt-3">
+                    @if($thepost->comments_body != null)
+                        <hr>
+                        <div class="media text-muted">
+                            <p>
+                               {!! strip_tags(str_limit($thepost->comments_body, $limit = 200, $end = '...')) !!}
+                            </p>    
+                                    
+                        </div>
 
-                               
-                                <p>
-                                   {!! strip_tags(str_limit($thepost->comments_body, $limit = 200, $end = '...')) !!}
-                                </p>
-                                   
-                                        
-                              
-                                
-                    </div>
-
-                    {{--<small class="d-block text-right mt-3">--}}
-                        {{--<a href="#">Lihat semua jawaban</a>--}}
-                    {{--</small>--}}
+                        <small class="d-block text-right mt-3">
+                            <a href="{{ url('post', ['id' => $thepost->id]) }}">Lihat semua jawaban</a>
+                        </small>
+                    @endif
 
                 </div>
             @endforeach
 
             <!-- Pagination -->
-            <div style="text-decoration:none; color: orange;">
+            <div class="text-warning" style="text-decoration:none; color: orange;">
                 {{ $posts->links() }}
             </div>
 
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 mt-5">
             {{-- kolom di kanan --}}
             <div>
                 

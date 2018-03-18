@@ -121,7 +121,7 @@
     </div>
 </nav>
 
-<main role="main" class="container">
+<main role="main" class="container mt-4">
    
    @yield('content')
    
