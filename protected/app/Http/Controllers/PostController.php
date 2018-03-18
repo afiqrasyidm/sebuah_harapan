@@ -39,6 +39,10 @@ class PostController extends Controller
             ->first();
 		
 		$comments = DB::table('comments')
+			->select('comments.id as id','users.id as user_id', 'comments.body as body',  'comments.is_anonim', 
+				'users.name as name', 'comments.created_at as created_at'
+			 )
+		
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
 			->orderBy('comments.created_at','DESC')
 			 ->where('comments.post_id', '=', $id)
@@ -82,7 +86,7 @@ class PostController extends Controller
 	 public function comment_post($id)
     {	
 		
-		
+		//untuk submit comment
 		if(Input::get('comment')){
 			
 			
@@ -110,12 +114,14 @@ class PostController extends Controller
 			
 			return redirect()->route('show.single.post', ['id' => $id]);
 		}
+		//hapus post
 		else if(Input::get('hapus')){
 			$post = Post::find($id);
 			$post->delete();
 			
 			return redirect()->route('home');
 		}
+		//edit post
 		//masuk ke text editor
 		else if(Input::get('ubah')){
 			
@@ -137,7 +143,7 @@ class PostController extends Controller
 			return view('belimbing/ubah-post')->with('post',$post);
 		
 		}
-		//untuk final setelah ubah
+		//untuk final setelah ubah post dari text editor
 		else if(Input::get('ubah_final')){
 			
 			
@@ -153,6 +159,16 @@ class PostController extends Controller
 				//return "lol";
 			
 			
+			
+			return redirect()->route('show.single.post', ['id' => $id]);
+		}
+		
+		//hapus comment
+		else if(Input::get('hapus_comment')){
+			
+			//return Input::get('hapus_comment');
+			$comment = Comment::find(Input::get('hapus_comment'));
+			$comment->delete();
 			
 			return redirect()->route('show.single.post', ['id' => $id]);
 		}
