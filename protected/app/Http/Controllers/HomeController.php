@@ -71,8 +71,10 @@ class HomeController extends Controller
       //  $users = User::all();
 //        $comments = Comment ::all();
 //        return response()->json($Comments, 201);
+		$judul = "Pertanyaan Terbaru ";
+
         
-        return view('belimbing/home')->with('posts',$posts);
+        return view('belimbing/home')->with('posts',$posts)->with('judul',$judul);
 
 //        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }
@@ -126,8 +128,11 @@ class HomeController extends Controller
       //  $users = User::all();
 //        $comments = Comment ::all();
 //        return response()->json($Comments, 201);
+
+		$judul = "Pertanyaan Terpopuler ";
+
         
-        return view('belimbing/home')->with('posts',$posts);
+        return view('belimbing/home')->with('posts',$posts)->with('judul',$judul);
 
 //        return view('belimbing/home')->with('posts',$posts)->with('comments',$comments);
     }

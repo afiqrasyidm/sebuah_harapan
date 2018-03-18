@@ -5,9 +5,10 @@
 
 <div class="row">
         <div class="col-lg-9">
-
-          
-
+			<br>
+			<br>
+          <h3>{{$judul}} Saat Ini</h3>
+			<br>
             @foreach($posts as $thepost)
                 <div class="my-3 p-3 bg-white rounded box-shadow">
 					<div  class="float-right">
