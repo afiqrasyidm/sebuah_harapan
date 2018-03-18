@@ -49,7 +49,11 @@ class HomeController extends Controller
 			DB::raw("(SELECT body FROM comments
                           WHERE comments.post_id = posts.id ORDER BY comments.created_at DESC LIMIT 1
                         ) as comments_body"),
-			 
+			
+			DB::raw("(SELECT count(*) FROM comments
+                          WHERE comments.post_id = posts.id 
+                        ) as comments_count"),
+			
 			 DB::raw('count(post_likes.id) as count_like'))
 			
              ->leftJoin('users', 'posts.user_id', '=', 'users.id')
@@ -106,6 +110,10 @@ class HomeController extends Controller
 			DB::raw("(SELECT body FROM comments
                           WHERE comments.post_id = posts.id ORDER BY comments.created_at DESC LIMIT 1
                         ) as comments_body"),
+						
+			DB::raw("(SELECT count(*) FROM comments
+                          WHERE comments.post_id = posts.id 
+                        ) as comments_count"),
 			 
 			 DB::raw('count(post_likes.id) as count_like'))
 			
