@@ -32,7 +32,12 @@ class PostController extends Controller
 		
 			->select('posts.id as id','users.id as user_id','users.name', 'posts.created_at as created_at',
 			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
-			 'posts.down_vote as down_vote'
+			 'posts.down_vote as down_vote',
+			 
+			 
+				DB::raw("(SELECT count(*) FROM comments
+                          WHERE comments.post_id = '$id' 
+                        ) as comments_count")
 			 )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
 			->where('posts.id', '=', $id)
@@ -40,7 +45,8 @@ class PostController extends Controller
 		
 		$comments = DB::table('comments')
 			->select('comments.id as id','users.id as user_id', 'comments.body as body',  'comments.is_anonim', 
-				'users.name as name', 'comments.created_at as created_at'
+				'users.name as name', 'comments.created_at as created_at' 
+				
 			 )
 		
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
