@@ -31,7 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-	
+
+Route::get('/new', 'HomeController@new')->name('new');
+
 Route::get('logout', 'Auth\LoginController@logout');
 
 Auth::routes();

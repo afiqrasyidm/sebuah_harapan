@@ -57,11 +57,11 @@
 											
 													
 													@if($post_likes_flag_user != NULL )
-														<input type="button" id= "upvote"  value = "Liked  {{$post_likes_count}} " name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														<input type="button" id= "upvote"  value = "Disukai  {{$post_likes_count}} " name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
 														<input type="button" id= "flag_user_like"  hidden value = "1" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 													@else
-														<input type="button" id= "upvote"  value = "Like? {{$post_likes_count}}" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														<input type="button" id= "upvote"  value = "Suka? {{$post_likes_count}}" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 												
 														<input type="button" id= "flag_user_like"  hidden value = "0" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
@@ -283,11 +283,11 @@
 
 					if(action == 0) {
 						$('#flag_user_like').val(0);
-						$('.up_vote').val("Like? " + response.post_likes_count);
+						$('.up_vote').val("Suka? " + response.post_likes_count);
 					}
 					else{
 						$('#flag_user_like').val(1);
-						$('.up_vote').val("Liked " + response.post_likes_count);
+						$('.up_vote').val("Disukai " + response.post_likes_count);
 					}
 					
 				},
