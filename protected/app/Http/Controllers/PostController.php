@@ -14,6 +14,7 @@ use App\Comment_like;
 
 use Auth;
 use App;
+use Mail;
 
 class PostController extends Controller
 {
@@ -148,6 +149,36 @@ class PostController extends Controller
 			$comment->down_vote = 0;
 			
 			$comment->save();
+			
+			
+			
+			
+			
+			$post = DB::table('posts')
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+			 ->where('posts.id', '=', $id)
+            ->first();
+			
+			//dd($post);
+
+			
+			
+			 $data = array('post_title'=> $post->title,
+							'post_creator'=> $post->name,
+							'post_crea_email'=> $post->email,
+							'post_id'=> $id
+						);
+			
+			//dd($data['post_crea_email']);
+			
+			 // $message = "asdasdasd";
+			  Mail::send('belimbing/mail', $data, function($message) use ($data) {
+				 $message->to($data['post_crea_email'], $data['post_creator'])->subject
+					('Pertanyaan Kamu Telah Dijawab!');
+				 $message->from('xyz@gmail.com','Belimbing');
+			  });
+		  
+			
 			
 			return redirect()->route('show.single.post', ['id' => $id]);
 		}
@@ -376,6 +407,18 @@ class PostController extends Controller
 
 		return  \Response::json($response);
     }
+	
+	public function basic_email(){
+		//return "asd";
+      $data = array('name'=>"Virat Gandhi");
+	 // $message = "asdasdasd";
+      Mail::send('belimbing/mail', $data, function($message) {
+         $message->to('afiqrasyidm@gmail.com', 'Tutorials Point')->subject
+            ('Laravel Basic Testing Mail');
+         $message->from('xyz@gmail.com','Virat Gandhi');
+      });
+      return "Basic Email Sent. Check your inbox.";
+   }
 	
 	
 	
