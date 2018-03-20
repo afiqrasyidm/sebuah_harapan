@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/myquestion', 'PostController@show_post_uid');
 	Route::post('/ask', 'PostController@ask_post');
 	Route::post('post/upvote', 'PostController@up_vote');
+	Route::post('post/upvote_comment', 'PostController@up_vote_comment');
 		
 });
 

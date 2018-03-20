@@ -56,12 +56,12 @@
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											
 													
-													@if($post_likes_flag_user != NULL )
-														<input type="button" id= "upvote"  value = "Disukai  ({{$post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+													@if($post->flag_user_vote_login != NULL )
+														<input type="button" id= "upvote"  value = "Disukai  ({{$post->post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
 														<input type="button" id= "flag_user_like"  hidden value = "1" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 													@else
-														<input type="button" id= "upvote"  value = "Suka ({{$post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														<input type="button" id= "upvote"  value = "Suka? ({{$post->post_likes_count}})" name="upvote"   class="up_vote btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 												
 														<input type="button" id= "flag_user_like"  hidden value = "0" name="upvote"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
 														
@@ -180,7 +180,28 @@
 							
 							
 								<div class="col-md-12">
-									
+									<div  class="float-right">
+							
+										<form class="form-horizontal" method="post" action="" role="form">
+										
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											
+													
+													@if($comment->flag_user_vote_login != NULL )
+														<input type="button" id= "upvote"  value = "Disukai  ({{$comment->comments_likes_count}})" name="{{$comment->id}}"   class="comment_id{{$comment->id}} up_vote_comment btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														
+														<input type="button" id= "flag_user_like_comment{{$comment->id}}"  hidden value = "1" name="{{$comment->id}}"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+													@else
+														<input type="button" id= "upvote"  value = "Suka? ({{$comment->comments_likes_count}})" name="{{$comment->id}}"   class="comment_id{{$comment->id}} up_vote_comment btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+												
+														<input type="button" id= "flag_user_like_comment{{$comment->id}}"  hidden value = "0" name="{{$comment->id}}"   class=" btn btn-sm btn-outline-success my-2 my-sm-0" href="#"/>
+														
+													@endif
+														
+										</form>	
+										
+									</div>
+       
 									<h5>	
 										@if ($comment->is_anonim == 0)
 			                                    {{ $comment->name }}
@@ -235,7 +256,7 @@
 	<script> 
 
     $(function(){ 
-       
+       //fungsi untuk post likes
         $(".up_vote").on('click', function(){ 
             
 			var value = $( "#flag_user_like" ).val();
@@ -283,7 +304,7 @@
 
 					if(action == 0) {
 						$('#flag_user_like').val(0);
-						$('.up_vote').val("Suka (" + response.post_likes_count + ")");
+						$('.up_vote').val("Suka? (" + response.post_likes_count + ")");
 					}
 					else{
 						$('#flag_user_like').val(1);
@@ -304,8 +325,81 @@
        });
 	   
 	});
+	
+	
+	$(function(){ 
+       //fungsi untuk comment_likes
+        $(".up_vote_comment").on('click', function(){ 
+            
+			var id_comment = $(this).attr("name");
+			var value = $( "#flag_user_like_comment"+id_comment ).val();
+			//alert(value);
+			
 
-    </script> 
+			//action yang harus dilakukan kalau 0 delete dan berarti udah pernah like, 1 insert belum like
+			var action = 1; 
+		//	alert(value);
+			if(value == 1){
+				action = 0;
+			}
+			
+			  $.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			
+			var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+			//alert(AuthUser);
+			if("" === AuthUser ){
+				window.location.href = '../login'; 
+			}
+			
+			
+			
+            $.ajax({ 
+				
+				 
+				
+				method: 'POST', // Type of response and matches what we said in the route
+				url: 'upvote_comment', // This is the url we gave in the route
+				data: {
+					'_token': $('input[name="_token"]').val(),
+					'up_vote': true,
+					'action' :action,
+					'comment_id':  id_comment,
+				},
+				 // a JSON object to send back
+				success: function(response){ // What to do if we succeed
+					console.log(response);
+
+					if(action == 0) {
+						$("#flag_user_like_comment"+id_comment ).val(0);
+						$('.comment_id'+id_comment).val("Suka? (" + response.comment_likes_count + ")");
+					}
+					else{
+						$("#flag_user_like_comment"+id_comment ).val(1);
+						$('.comment_id'+id_comment).val("Disukai (" + response.comment_likes_count + ")");
+					}
+					
+				},
+				error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+					console.log(JSON.stringify(jqXHR));
+					console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+					//alert("");
+				}
+				
+				 
+   
+          });
+ 
+       });
+	   
+	});
+
+	
+    </script>
+	
 	
 	
 

@@ -10,6 +10,7 @@ use App\Post;
 use App\User;
 use App\Comment;
 use App\Post_like;
+use App\Comment_like;
 
 use Auth;
 use App;
@@ -26,67 +27,97 @@ class PostController extends Controller
 
     public function show($id)
     {
-		
+	
+		//kalau belum login di counter id == -1, supaya g error
+		$user_id_login = -1;
+		if(Auth::check()){
+					
+					$user_id_login = Auth::user()->id ;
+				
+
+		}
+	
+	///
+		///Query untuk handle posts
+	////
+	
+
 		
 		$post = DB::table('posts')
 		
 			->select('posts.id as id','users.id as user_id','users.name', 'posts.created_at as created_at',
 			 'posts.body as body', 'posts.title as title', 'posts.up_vote as up_vote',
-			 'posts.down_vote as down_vote',
+			 'posts.down_vote as down_vote', 'flag_vote as flag_user_vote_login',
 			 
-			 
-				DB::raw("(SELECT count(*) FROM comments
+			 DB::raw("(SELECT count(*) FROM post_likes
+                          WHERE posts.id = post_likes.post_id 
+                        ) as post_likes_count"),
+			
+			DB::raw("(SELECT count(*) FROM comments
                           WHERE comments.post_id = '$id' 
                         ) as comments_count")
+						
+						
+				
 			 )
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin(DB::raw("(SELECT *  FROM post_likes
+							WHERE post_likes.user_id = '$user_id_login'
+								AND post_likes.post_id = '$id'
+							) pl"),'pl.user_id' , '=', 'posts.user_id')
+
 			->where('posts.id', '=', $id)
             ->first();
+		//post id tidak ada di dalam db
+	//	dd($post);
+		if($post == NULL){
+			
+			abort(404);
+		}
+
+		
+				
+				
+		//dd($post);
+		
+		
+
+	///
+		///Query untuk handle comment
+	////
+	
+
+		
 		
 		$comments = DB::table('comments')
 			->select('comments.id as id','users.id as user_id', 'comments.body as body',  'comments.is_anonim', 
-				'users.name as name', 'comments.created_at as created_at' 
+				'users.name as name', 'comments.created_at as created_at' , 'flag_vote as flag_user_vote_login',
+				DB::raw("(SELECT count(*) FROM comment_likes
+                          WHERE comments.id = comment_likes.comment_id 
+                        ) as comments_likes_count")
 				
 			 )
 		
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-			->orderBy('comments.created_at','DESC')
+			 ->leftJoin(DB::raw("(SELECT *  FROM comment_likes
+							WHERE comment_likes.user_id = '$user_id_login'
+							) cl"),'cl.comment_id' , '=', 'comments.id')
+			->orderBy('comments_likes_count','comments.created_at','DESC')
 			 ->where('comments.post_id', '=', $id)
             ->get();
 			
-		$post_likes_count = DB::table('post_likes')
-			 ->where('post_likes.post_id', '=', $id)
-			 ->where('flag_vote', '=',1)
-			 ->count();
-			 
-
-		
-		$post_likes_flag_user = null;
-		if(Auth::check()){
-				//ambil apakah user tersebut sudah likes apa belum kalau hasil 1 likes, 2 unlikes
-				$post_likes_flag_user = DB::table('post_likes')
-				->where('post_likes.post_id', '=', $id)
-				->where('user_id', '=', Auth::user()->id)
-				->first();
-				
 			
-			
-
-		}
-
+	
 //		return $post_likes_flag_user;
 		
-		if($post == NULL){
-			abort(404);
-		}
+
 	//return $comments ;
 		
-		//dd($post);
+//dd($comments);
     
-        return view('belimbing/single-post')->with('post',$post)->with('comments',$comments)
-		->with('post_likes_count',$post_likes_count)
-		->with('post_likes_flag_user',$post_likes_flag_user);
-  
+        return view('belimbing/single-post')->with('post',$post)
+		->with('comments',$comments)
+		;
 	}
 	
 	 public function comment_post($id)
@@ -313,6 +344,39 @@ class PostController extends Controller
 
 		return  \Response::json($response);
     }
+	public function up_vote_comment(Request $request)
+    {
+		
+	
+	  if($request->action == 1){
+		$comment_like = new Comment_like;
+		$comment_like->user_id =Auth::user()->id;
+		$comment_like->comment_id = $request->comment_id;
+		$comment_like->flag_vote = 1;
+		$comment_like->save();
+	  }
+	  else{
+		  $comment_like = Comment_like::where('user_id', Auth::user()->id)
+						->where('comment_id', $request->comment_id)
+						->delete();
+	  }
+		
+		
+		$comment_likes_count = DB::table('comment_likes')
+			 ->where('comment_likes.comment_id', '=', $request->comment_id)
+			 ->where('flag_vote', '=',1)
+			 ->count();
+			 
+			 
+        $response = array(
+			'status' => "saved" ,
+			'msg'    => 'Setting created successfully',
+			'comment_likes_count' =>$comment_likes_count,
+		);
+
+		return  \Response::json($response);
+    }
+	
 	
 	
 	
