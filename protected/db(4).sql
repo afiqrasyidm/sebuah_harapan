@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2018 at 06:43 AM
+-- Generation Time: Mar 20, 2018 at 09:22 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -69,6 +69,35 @@ INSERT INTO `comments` (`id`, `body`, `post_id`, `user_id`, `is_anonim`, `up_vot
 (95, '<p>asdasd</p>', 71, 21, 0, 0, 0, '2018-03-17 03:37:58', '2018-03-17 03:37:58'),
 (96, '<p>LLL</p>', 71, 21, 0, 0, 0, '2018-03-17 03:39:36', '2018-03-17 03:39:36'),
 (97, '<p>asadasdasdasd</p>', 71, 21, 1, 0, 0, '2018-03-17 03:40:30', '2018-03-17 03:40:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_likes`
+--
+
+CREATE TABLE `comment_likes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `comment_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `flag_vote` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comment_likes`
+--
+
+INSERT INTO `comment_likes` (`id`, `comment_id`, `user_id`, `flag_vote`, `created_at`, `updated_at`) VALUES
+(4, '95', '21', 1, '2018-03-20 00:39:38', '2018-03-20 00:39:38'),
+(5, '92', '21', 1, '2018-03-20 01:17:33', '2018-03-20 01:17:33'),
+(6, '91', '21', 1, '2018-03-20 01:17:43', '2018-03-20 01:17:43'),
+(7, '90', '21', 1, '2018-03-20 01:17:45', '2018-03-20 01:17:45'),
+(8, '96', '21', 1, '2018-03-20 01:17:48', '2018-03-20 01:17:48'),
+(9, '91', '28', 1, '2018-03-20 01:18:19', '2018-03-20 01:18:19'),
+(11, '92', '28', 1, '2018-03-20 01:18:22', '2018-03-20 01:18:22'),
+(13, '96', '28', 1, '2018-03-20 01:18:24', '2018-03-20 01:18:24');
 
 -- --------------------------------------------------------
 
@@ -142,7 +171,7 @@ CREATE TABLE `post_likes` (
 INSERT INTO `post_likes` (`id`, `post_id`, `user_id`, `flag_vote`, `created_at`, `updated_at`) VALUES
 (107, '71', '28', 1, '2018-03-17 02:31:20', '2018-03-17 02:31:20'),
 (108, '70', '28', 1, '2018-03-17 02:31:51', '2018-03-17 02:31:51'),
-(112, '70', '21', 1, '2018-03-17 03:24:56', '2018-03-17 03:24:56');
+(136, '71', '21', 1, '2018-03-20 00:49:05', '2018-03-20 00:49:05');
 
 -- --------------------------------------------------------
 
@@ -181,10 +210,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `api_token`, `created_at`, `updated_at`, `last_login`, `login_count`) VALUES
-(21, 'BaronFive', 'afiqrasyidm@gmail.com', '$2y$10$oNvHFPWtfydPY7FlhlVBYu//ObA75b1zJFA9ajO6unvIbrVDLpb3e', 'ZcJajcrdeErDc2yPMN4w2Cyh6ny7CZ09AOrLKDLKyFMPFqe9tnp5ba47oQBV', 'RYKsUUS8g9kCcI4EYpnZ6LULeiZEtnsCGEKVoMMVqcNbBFkRMJLSMCfukKWr', '2018-03-11 16:45:03', '2018-03-11 16:45:03', '2018-03-17 22:39:52', 233),
+(21, 'BaronFive', 'afiqrasyidm@gmail.com', '$2y$10$oNvHFPWtfydPY7FlhlVBYu//ObA75b1zJFA9ajO6unvIbrVDLpb3e', 'LpcM5JsoeFJ9ig7yEluetYcs6X6AobxgAtrkXgdSlqeXcNp5hSFJmkrrQv79', 'RYKsUUS8g9kCcI4EYpnZ6LULeiZEtnsCGEKVoMMVqcNbBFkRMJLSMCfukKWr', '2018-03-11 16:45:03', '2018-03-11 16:45:03', '2018-03-20 01:12:30', 270),
 (22, 'admin', 'admin@test.com', '$2y$10$3lLqyyhkwViunNTQIa6e1Ow2jywQjv6Y51ZNh3x6Xo0Zis1En6EFy', 'cKBwmi8iuwYi8LenIdky5Zzl12h8h6dVEav9wkOfUpNS7SlvOe13GU6KpXtd', 'ao4uFK2idjbAg8iWcrYoLXOtks1jRxBJ2A2mvqKQdBNuRnuJ5dG4TLXJGw59', '2018-03-11 18:11:06', '2018-03-11 18:11:06', '2018-03-11 18:11:06', 2),
 (27, 'anonim', 'anonim@anonim.com', '$2y$10$rj5utQQimlKAjacRhhIX2ue0yhDLy2jQBg4NOuFlhnh0ewlYXTtoW', NULL, 'gavcvwU09NO87fdJyRTp3zCLlROR11BVqrHW8KsmgM6BE33xWrGc8Uj25A1R', '2018-03-15 16:52:18', '2018-03-15 16:52:19', '2018-03-15 23:52:18', 1),
-(28, 'Kocak', 'kocak@kocak.com', '$2y$10$RwwoYitQqAMa3iiQsHXcQ.e/cxdzoFGfVDobgA6t/vMvezUfjQxmK', 'NqNCJhBbb3nkzoxt4rrz4ilsOUYulGUzI1vIHWtdeBR6Y1O6RbGRdlJVu7Th', '4rlP7dlLe1dSuZtlb7eweKP9hGUG8RDnR4gnyqNWlTjueDycnKY0v3cU7OfA', '2018-03-17 02:31:16', '2018-03-17 02:31:16', '2018-03-17 02:31:46', 6);
+(28, 'Kocak', 'kocak@kocak.com', '$2y$10$RwwoYitQqAMa3iiQsHXcQ.e/cxdzoFGfVDobgA6t/vMvezUfjQxmK', '1GcTv23mJFE1BYOmXDz0lzE1Dk9VDAzzTgiuONC1XhNyXn6RCXEyjCy9O70I', '4rlP7dlLe1dSuZtlb7eweKP9hGUG8RDnR4gnyqNWlTjueDycnKY0v3cU7OfA', '2018-03-17 02:31:16', '2018-03-17 02:31:16', '2018-03-20 01:18:15', 7);
 
 --
 -- Indexes for dumped tables
@@ -194,6 +223,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `api_t
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -235,7 +270,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -253,7 +294,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `post_likes`
 --
 ALTER TABLE `post_likes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `titles`
